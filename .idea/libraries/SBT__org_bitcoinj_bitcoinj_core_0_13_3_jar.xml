@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.bitcoinj:bitcoinj-core:0.13.3:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bitcoinj/bitcoinj-core/jars/bitcoinj-core-0.13.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bitcoinj/bitcoinj-core/docs/bitcoinj-core-0.13.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bitcoinj/bitcoinj-core/srcs/bitcoinj-core-0.13.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
