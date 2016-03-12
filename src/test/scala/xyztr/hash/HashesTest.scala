@@ -17,4 +17,10 @@ class HashesTest extends FlatSpec with Matchers {
 
     // Should be: QmfM2r8seH2GiRaC4esTjeraXEachRt8ZsSeGaWTPLyMoG
   }
+
+  "Hasher" should "give us Base58 encoded strings from SHA256 hashes" in {
+    val s = "a string"
+    val base58Hash = Hasher.base58HashFromBytes(s.getBytes("UTF-8"))
+    base58Hash should be("DyrKAnRAxEWTmVaHwBVzd6vEYKiA2zieTQrsKubNHNQX")
+  }
 }
