@@ -7,16 +7,21 @@ class Bubble(val name: String, creator: User) {
   val friends = new scala.collection.mutable.HashSet[Friend]()
   val encryptionKey = Crypto.createSymmetricEncryptionKey()
 
-  def hashOfHashes() = {
-    Hasher.base58HashFromBytes(name.getBytes("UTF-8"))
-  }
+  def hashOfBytes() = Hasher.base58HashFromBytes(allDataAsBytes())
+
+  // TODO: This is just a short term hack, we need to do something else, since we can't serialize/unserialize like this
+  def allDataAsBytes(): Array[Byte] =
+    List(name.getBytes("UTF-8"),
+//         friends.map(f=> List(f.name.getBytes("UTF-8"), f.publicKey.getEncoded)),
+         encryptionKey.getEncoded)
+    .flatten.toArray
 
   def addFriend(f: Friend) = {
     friends.add(f)
   }
 
   // TODO: Replace name with IPFS hash
-  def createBubbleInvitations() = friends.map(f => BubbleInvitation(name, Crypto.encrypt(encryptionKey.getEncoded, f.publicKey)))
+  def createBubbleInvitations() = friends.map(f => BubbleInvitation(name, Crypto.encryptWithPublicKey(encryptionKey.getEncoded, f.publicKey)))
 
   def hasMember(friend: Friend) = friends.exists(_.publicKey == friend.publicKey)
 }

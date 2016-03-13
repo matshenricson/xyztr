@@ -13,8 +13,8 @@ object IPFS {
     * @return the IPFS content Base58 content hash of the encrypted bubble sent to IPFS
     */
   def send(bubble: Bubble): String = {
-    storage.put(bubble.hashOfHashes(), bubble)
-    bubble.hashOfHashes()
+    storage.put(bubble.hashOfBytes(), bubble)
+    bubble.hashOfBytes()
   }
 
   /**

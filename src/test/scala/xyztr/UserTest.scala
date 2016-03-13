@@ -48,7 +48,7 @@ class UserTest extends FlatSpec with Matchers {
     bubble.addFriend(mats.friends.head)
 
     val invitation = bubble.createBubbleInvitations().head
-    val decryptedBubbleEncryptionKey = Crypto.decrypt(invitation.encryptedEncryptionKey, bengt.privateKey())
+    val decryptedBubbleEncryptionKey = Crypto.decryptWithPrivateKey(invitation.encryptedEncryptionKey, bengt.privateKey())
     decryptedBubbleEncryptionKey should be(bubble.encryptionKey.getEncoded)
   }
 }
