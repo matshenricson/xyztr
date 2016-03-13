@@ -5,7 +5,7 @@ import javax.crypto.{Cipher, KeyGenerator}
 import org.scalatest.{FlatSpec, Matchers}
 
 class CryptoTest extends FlatSpec with Matchers {
-  "Cipher" should "let me encrypt data, then decrypt" in {
+  "Cipher" can "encrypt data, then decrypt" in {
     val stringToEncrypt = "Hello world"
     val aesKey = KeyGenerator.getInstance("AES").generateKey()
     val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
