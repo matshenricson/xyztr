@@ -23,4 +23,17 @@ class UserTest extends FlatSpec with Matchers {
     val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
     val bubble = new Bubble("Bubble name", mats)
   }
+
+  "User" can "add friends to bubbles" in {
+    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
+    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+
+    val fr = FriendRequest(bengt.name, bengt.publicKey())
+    mats.friendRequest(fr)
+
+    val bubble = new Bubble("Bubble name", mats)
+    val bubbleRequest = bubble.addFriend(mats.friends.head)
+
+    bubble.hasMember(mats.friends.head)
+  }
 }

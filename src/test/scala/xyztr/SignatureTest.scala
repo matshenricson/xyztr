@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class SignatureTest extends FlatSpec with Matchers {
   "Signatures" should "let me sign messages and verify signed messages" in {
     val keyPair = Crypto.createPrivatePublicPair()
-    val dsaSignature = Signature.getInstance("SHA1withDSA")
+    val dsaSignature = Signature.getInstance("SHA1withRSA")
     dsaSignature.initSign(keyPair.getPrivate)
     val someData = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
     dsaSignature.update(someData)

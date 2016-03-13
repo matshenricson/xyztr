@@ -1,13 +1,13 @@
 package xyztr
 
-import javax.crypto.{Cipher, KeyGenerator}
+import javax.crypto.Cipher
 
 import org.scalatest.{FlatSpec, Matchers}
 
 class CryptoTest extends FlatSpec with Matchers {
   "Cipher" can "encrypt data, then decrypt" in {
     val stringToEncrypt = "Hello world"
-    val aesKey = KeyGenerator.getInstance("AES").generateKey()
+    val aesKey = Crypto.createSymmetricEncryptionKey()
     val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
 
     // Lets encrypt
