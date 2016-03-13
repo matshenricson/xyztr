@@ -1,6 +1,7 @@
 package xyztr
 
 import java.security.{PublicKey, PrivateKey, KeyPairGenerator, SecureRandom}
+import javax.crypto.spec.SecretKeySpec
 import javax.crypto.{SecretKey, KeyGenerator, Cipher}
 
 object Crypto {
@@ -36,5 +37,14 @@ object Crypto {
     val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
     cipher.init(Cipher.DECRYPT_MODE, aesKey)
     cipher.doFinal(cipherTextBytes)
+  }
+
+  def encryptSymmetricKeyWithPublicKey(secretKey: SecretKey, publicKey: PublicKey): Array[Byte] = {
+    Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey)
+  }
+
+  def decryptSymmetricKeyWithPrivateKey(encryptedEncryptionKey: Array[Byte], privateKey: PrivateKey): SecretKey = {
+    val decryptedSymmetricEncryptionKeyBytes = Crypto.decryptWithPrivateKey(encryptedEncryptionKey, privateKey)
+    new SecretKeySpec(decryptedSymmetricEncryptionKeyBytes, "AES")
   }
 }

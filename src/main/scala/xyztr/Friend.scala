@@ -9,6 +9,7 @@ import java.security.PublicKey
 case class Friend(name: String, publicKey: PublicKey) {
 }
 
+// TODO: Do I really need the two classes below ????
 case class FriendRequest(name: String, publicKey: PublicKey) {
 }
 

@@ -9,7 +9,7 @@ class User(val name: String, keyPair: KeyPair) {
   val friends = new scala.collection.mutable.HashSet[Friend]()
 
   def publicKey() = keyPair.getPublic
-  def privateKey() = keyPair.getPrivate
+  def privateKey() = keyPair.getPrivate    // TODO: Dangerous! Mark it as deprecated some way?
 
   def friendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.name, fr.publicKey))
