@@ -1,10 +1,9 @@
-package xyztr.random
+package xyztr
 
 import java.security.SecureRandom
 import java.util.Random
 
 import org.scalatest.{FlatSpec, Matchers}
-import xyztr.util.Bytes
 
 class RandomTest extends FlatSpec with Matchers {
   "SecureRandom" should "generate completely random numbers by default" in {

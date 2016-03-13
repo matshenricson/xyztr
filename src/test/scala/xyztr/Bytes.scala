@@ -1,7 +1,7 @@
-package xyztr.util
+package xyztr
 
 /**
-  * Created by mats on 2016-03-10.
+  * Utility functions for bytes
   */
 object Bytes {
   def toBytes(xs: Int*) = xs.map(_.toByte).toArray

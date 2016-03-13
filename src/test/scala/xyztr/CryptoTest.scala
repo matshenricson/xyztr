@@ -1,4 +1,4 @@
-package xyztr.crypto
+package xyztr
 
 import javax.crypto.{Cipher, KeyGenerator}
 

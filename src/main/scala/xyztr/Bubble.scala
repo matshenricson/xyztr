@@ -1,9 +1,7 @@
-package xyztr.bubble
-
-import xyztr.hash.Hasher
+package xyztr
 
 /**
-  * Created by mats on 2016-03-12.
+  * Represents all data in a bubble.
   */
 case class Bubble(name: String) {
   def hashOfHashes() = {

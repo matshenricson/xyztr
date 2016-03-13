@@ -1,4 +1,4 @@
-package xyztr.hash
+package xyztr
 
 import java.security.MessageDigest
 

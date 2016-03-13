@@ -1,4 +1,4 @@
-package xyztr.bubble
+package xyztr
 
 import org.scalatest.{FlatSpec, Matchers}
 
