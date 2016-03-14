@@ -2,6 +2,7 @@
   <dictionary name="mats">
     <words>
       <w>hasher</w>
+      <w>ipfs</w>
     </words>
   </dictionary>
 </component>

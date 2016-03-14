@@ -2,10 +2,13 @@ package xyztr
 
 import javax.crypto.SecretKey
 
+import org.ipfs.api.IPFS
+
 /**
   * Proxy to IPFS
   */
-object IPFS {
+object IPFSProxy {
+  val ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001")
   val storage = new scala.collection.mutable.HashMap[String, Array[Byte]]()
 
   /**

@@ -44,7 +44,7 @@ class UserTest extends FlatSpec with Matchers {
     mats.friendRequest(fr)
 
     val bubble = new Bubble("Bubble name", mats, mats.friends.toSet)
-    val ipfsHash = IPFS.send(bubble)
+    val ipfsHash = IPFSProxy.send(bubble)
     val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptWithPublicKey(bubble.encryptionKey.getEncoded, f.publicKey)))
 
     val decryptedBubbleEncryptionKey = Crypto.decryptWithPrivateKey(invitations.head.encryptedEncryptionKey, bengt.privateKey())
@@ -59,12 +59,12 @@ class UserTest extends FlatSpec with Matchers {
     mats.friendRequest(fr)
 
     val bubble = new Bubble("Bubble name", mats, mats.friends.toSet)
-    val ipfsHash = IPFS.send(bubble)
+    val ipfsHash = IPFSProxy.send(bubble)
     val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptSymmetricKeyWithPublicKey(bubble.encryptionKey, f.publicKey)))
 
     val decryptedBubbleEncryptionKey = Crypto.decryptSymmetricKeyWithPrivateKey(invitations.head.encryptedEncryptionKey, bengt.privateKey())
 
-    val fetchedBubbleFromIpfs = IPFS.receive(ipfsHash, decryptedBubbleEncryptionKey).getOrElse(throw new AssertionError("Weird"))
+    val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey).getOrElse(throw new AssertionError("Weird"))
     val fetchedBubbleHash = Hasher.base58HashFromBytes(fetchedBubbleFromIpfs)
 
     fetchedBubbleHash should be(bubble.hashOfBytes())

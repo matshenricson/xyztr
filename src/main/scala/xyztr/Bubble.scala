@@ -27,7 +27,7 @@ case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte
 object BubbleCreator {
   def create(name: String, creator: User, friends: Set[Friend]): Set[BubbleInvitation] = {
     val bubble = new Bubble(name, creator, friends)
-    val ipfsHash = IPFS.send(bubble)
+    val ipfsHash = IPFSProxy.send(bubble)
     friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptWithPublicKey(bubble.encryptionKey.getEncoded, f.publicKey)))
   }
 }

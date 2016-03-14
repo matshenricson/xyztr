@@ -39,5 +39,15 @@
     <orderEntry type="library" name="SBT: org.bitcoinj:bitcoinj-core:0.13.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.bitcoinj:orchid:1.1.1:jar" level="project" />
     <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.7:jar" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
