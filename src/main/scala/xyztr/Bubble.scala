@@ -1,10 +1,13 @@
 package xyztr
 
+import java.security.PublicKey
+
 /**
   * Represents all data in a bubble.
   */
-class Bubble(val name: String, creator: User, val friends: Set[Friend]) {    // TODO: How add new friends ?? Clone old one?
+class Bubble(val name: String, creator: User, private val friends: Set[Friend]) {
   val encryptionKey = Crypto.createSymmetricEncryptionKey()
+  val members = friends.map(f => BubbleMember(f.name, f.publicKey)) + BubbleMember(creator.name, creator.publicKey())
 
   def hashOfBytes() = Hasher.base58HashFromBytes(allDataAsBytes())
 
@@ -12,17 +15,18 @@ class Bubble(val name: String, creator: User, val friends: Set[Friend]) {    // 
   def allDataAsBytes(): Array[Byte] =
     List(name.getBytes("UTF-8"),
          creator.publicKey().getEncoded,
-//         friends.map(f=> List(f.name.getBytes("UTF-8"), f.publicKey.getEncoded)),
+//         members.map(m => m.allDataAsBytes()),
          encryptionKey.getEncoded)
     .flatten.toArray
 
-  // TODO: Replace name with IPFS hash
-  def createBubbleInvitations() = friends.map(f => BubbleInvitation(name, Crypto.encryptWithPublicKey(encryptionKey.getEncoded, f.publicKey)))
-
-  def hasMember(friend: Friend) = friends.exists(_.publicKey == friend.publicKey)
+  def hasMember(friend: Friend) = members.exists(_.publicKey == friend.publicKey)
 }
 
 case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte])
+
+case class BubbleMember(name: String, publicKey: PublicKey) {
+  def allDataAsBytes(): Array[Byte] = List(name.getBytes("UTF-8"), publicKey.getEncoded).flatten.toArray
+}
 
 object BubbleCreator {
   def create(name: String, creator: User, friends: Set[Friend]): Set[BubbleInvitation] = {
