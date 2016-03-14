@@ -25,20 +25,14 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.7:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.2.6:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.google.code.findbugs:jsr305:2.0.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.google.guava:guava:16.0.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.google.protobuf:protobuf-java:2.5.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.lambdaworks:scrypt:1.4.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.madgag.spongycastle:core:1.51.0.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.okhttp:okhttp:2.2.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.okio:okio:1.2.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: net.jcip:jcip-annotations:1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.bitcoinj:bitcoinj-core:0.13.3:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.bitcoinj:orchid:1.1.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.thoughtworks.paranamer:paranamer:2.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-ast_2.11:3.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-core_2.11:3.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-native_2.11:3.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-scalap_2.11:3.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
