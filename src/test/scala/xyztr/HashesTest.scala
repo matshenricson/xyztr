@@ -2,6 +2,7 @@ package xyztr
 
 import java.security.MessageDigest
 
+import org.ipfs.api.Base58
 import org.scalatest.{FlatSpec, Matchers}
 
 class HashesTest extends FlatSpec with Matchers {
@@ -19,7 +20,7 @@ class HashesTest extends FlatSpec with Matchers {
 
   "Hasher" should "give us Base58 encoded strings from SHA256 hashes" in {
     val s = "a string"
-    val base58Hash = Hasher.base58HashFromBytes(s.getBytes("UTF-8"))
-    base58Hash should be("DyrKAnRAxEWTmVaHwBVzd6vEYKiA2zieTQrsKubNHNQX")
+    val base58Hash = Base58.encode(s.getBytes("UTF-8"))
+    base58Hash should be("HFFaDkkUADc")
   }
 }
