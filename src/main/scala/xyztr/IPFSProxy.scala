@@ -17,14 +17,15 @@ object IPFSProxy {
   implicit val formats = Serialization.formats(NoTypeHints)
 
   /**
-    * Encrypts a bubble and sends it to IPFS for storage
+    * Encrypts a bubble and sends it to IPFS
     *
     * @param bubble the bubble to be encrypted and sent to IPFS
     * @param bubbleEncryptionKey the symmetric key used to encrypt the bubble before sending to IPFS
     * @return the IPFS content Base58 content hash of the encrypted bubble sent to IPFS
     */
   def send(bubble: Bubble, bubbleEncryptionKey: SecretKey): String = {
-    val bubbleJSONBytes = write(bubble).getBytes("UTF-8")
+    val bubbleJSONString = write(bubble)
+    val bubbleJSONBytes = bubbleJSONString.getBytes("UTF-8")
     val encryptedBubbleJSONBytes = Crypto.encryptWithSymmetricKey(bubbleJSONBytes, bubbleEncryptionKey)
     val data = new NamedStreamable.ByteArrayWrapper(encryptedBubbleJSONBytes)
     val merkleNode = ipfs.add(data)
@@ -35,14 +36,14 @@ object IPFSProxy {
     * Gets an encrypted Bubble from IPFS and decrypts it
     *
     * @param ipfsHash the IPFS Base58 hash of the encrypted Bubble we wish to get from IPFS
-    * @param bubbleEncryptionKey the symmetric key used to decrypt the encrypted bubble fetched from IPFS
+    * @param bubbleDecryptionKey the symmetric key used to decrypt the encrypted bubble fetched from IPFS
     * @return the decrypted Bubble object
     */
-  def receive(ipfsHash: String, bubbleEncryptionKey: SecretKey): Bubble = {
+  def receive(ipfsHash: String, bubbleDecryptionKey: SecretKey): Bubble = {
     val hash = Multihash.fromBase58(ipfsHash)
     val encryptedBubbleJSONBytes = ipfs.cat(hash)
-    val decryptedJSONBytes = Crypto.decryptWithSymmetricKey(encryptedBubbleJSONBytes, bubbleEncryptionKey)
-    val bubbleJSONString = new String(decryptedJSONBytes, "UTF-8")
+    val bubbleJSONBytes = Crypto.decryptWithSymmetricKey(encryptedBubbleJSONBytes, bubbleDecryptionKey)
+    val bubbleJSONString = new String(bubbleJSONBytes, "UTF-8")
     read[Bubble](bubbleJSONString)
   }
 }
