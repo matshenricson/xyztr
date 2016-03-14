@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
     </list>
     <ignored path="xyztr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +55,8 @@
       <file leaf-file-name="IPFSProxy.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44174758">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.46601942">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -79,8 +80,10 @@
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding />
+              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+              <folding>
+                <element signature="e#15#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding>
                 <element signature="e#15#36#0" expanded="true" />
               </folding>
@@ -883,26 +886,11 @@
       <workItem from="1457628290212" duration="2900000" />
       <workItem from="1457635486534" duration="21540000" />
       <workItem from="1457891533910" duration="8659000" />
-      <workItem from="1457901205769" duration="34473000" />
+      <workItem from="1457901205769" duration="36539000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 21h 07m 52s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 21h 20m 53s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 21h 59m 22s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 22h 16m 53s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 22h 27m 21s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 22h 32m 20s.xml">
       <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -918,9 +906,24 @@
     <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 22h 58m 24s.xml">
       <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 23h 10m 30s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 23h 17m 41s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 23h 18m 15s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 23h 28m 49s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 23h 30m 09s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69721000" />
+    <option name="totallyTimeSpent" value="71787000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -970,16 +973,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="70" />
-          <folding>
-            <element signature="e#15#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/User.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1046,7 +1039,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#15#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1385,10 +1380,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.json4s/json4s-native_2.11/srcs/json4s-native_2.11-3.3.0-sources.jar!/org/json4s/native/Serialization.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33281973">
+          <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1396,7 +1391,17 @@
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="16" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="16" />
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding>
             <element signature="e#15#36#0" expanded="true" />
           </folding>
@@ -1405,8 +1410,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44174758">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.46601942">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="e#15#44#0" expanded="true" />
           </folding>

@@ -1,5 +1,7 @@
 package xyztr
 
+import java.util.Date
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class UserTest extends FlatSpec with Matchers {
@@ -61,6 +63,22 @@ class UserTest extends FlatSpec with Matchers {
     val decryptedBubbleEncryptionKey = Crypto.decryptSymmetricKeyWithPrivateKey(invitations.head.encryptedEncryptionKey, bengt.privateKey())
 
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey)
+
+    fetchedBubbleFromIpfs should be(bubble)
+  }
+
+  "User" can "inspect plain text bubble if its encryption is turned off" in {
+    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
+    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+
+    val fr = FriendRequest(bengt.name, bengt.publicKey())
+    mats.friendRequest(fr)
+
+    val bubble = Bubble("Bubble name", mats, new Date().getTime, 0, mats.friends.toSet, "Landskamp", false)
+    val ipfsHash = IPFSProxy.send(bubble)
+    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash))
+
+    val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash)
 
     fetchedBubbleFromIpfs should be(bubble)
   }
