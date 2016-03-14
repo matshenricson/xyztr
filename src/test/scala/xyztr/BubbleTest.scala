@@ -7,7 +7,7 @@ class BubbleTest extends FlatSpec with Matchers {
     val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
     val bubble = new Bubble("Bubble name", mats, Set.empty)
     val sha256 = bubble.sha256OfData()
-    sha256.length should be(44)
+    sha256.length should be <= 44
   }
 
   "Bubble" should "should have its creator among the members" in {

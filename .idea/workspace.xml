@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_google_code_findbugs_jsr305_2_0_1_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_google_guava_guava_16_0_1_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_google_protobuf_protobuf_java_2_5_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_lambdaworks_scrypt_1_4_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_madgag_spongycastle_core_1_51_0_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_squareup_okhttp_okhttp_2_2_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__com_squareup_okio_okio_1_2_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__net_jcip_jcip_annotations_1_0_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_bitcoinj_bitcoinj_core_0_13_3_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_bitcoinj_orchid_1_1_1_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_modules_scala_xml_2_11_1_0_2_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_slf4j_slf4j_api_1_7_7_jar.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_11_8_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_11_8_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_reflect_2_11_7_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_reflect_2_11_7_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scalatest_scalatest_2_11_2_2_6_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_scalatest_scalatest_2_11_2_2_6_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/xyztr-build.iml" afterPath="$PROJECT_DIR$/.idea/modules/xyztr-build.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/xyztr.iml" afterPath="$PROJECT_DIR$/.idea/modules/xyztr.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" />
     </list>
     <ignored path="xyztr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,10 +42,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="build.sbt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.sbt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.sbt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2542373">
+            <state vertical-scroll-proportion="0.0">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
@@ -72,21 +56,9 @@
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/HashesTest.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#15#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Crypto.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Crypto.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
-              <folding>
-                <element signature="e#15#91#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +79,7 @@
       <file leaf-file-name="User.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/User.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-9.67742">
               <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
@@ -134,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserTest.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserTest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.86132514">
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -148,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding>
                 <element signature="e#15#62#0" expanded="true" />
               </folding>
@@ -197,12 +169,12 @@
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/IPFS.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/Hasher.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/HashesTest.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/xyztr/User.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
+        <option value="$PROJECT_DIR$/build.sbt" />
+        <option value="$PROJECT_DIR$/src/main/scala/xyztr/User.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" />
-        <option value="$PROJECT_DIR$/build.sbt" />
       </list>
     </option>
   </component>
@@ -942,29 +914,11 @@
       <workItem from="1457628290212" duration="2900000" />
       <workItem from="1457635486534" duration="21540000" />
       <workItem from="1457891533910" duration="8659000" />
-      <workItem from="1457901205769" duration="21921000" />
+      <workItem from="1457901205769" duration="23644000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 14h 33m 56s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 14h 35m 09s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 14h 38m 54s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 15h 10m 07s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 15h 39m 12s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 15h 39m 27s.xml">
-      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 15h 40m 36s.xml">
       <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -977,9 +931,27 @@
     <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 16h 56m 48s.xml">
       <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 19m 46s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 20m 33s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 20m 57s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 21m 15s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 21m 28s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.14 at 17h 22m 24s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57169000" />
+    <option name="totallyTimeSpent" value="58892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1388,17 +1360,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Friend.scala">
+    <entry file="file://$PROJECT_DIR$/build.sbt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Crypto.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.5146379">
           <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
           <folding>
             <element signature="e#15#91#0" expanded="true" />
@@ -1406,37 +1378,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/User.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/HashesTest.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="e#15#49#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1450,20 +1398,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Friend.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/User.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.67742">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="e#15#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.sbt">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2542373">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.86132514">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding />
         </state>
       </provider>
