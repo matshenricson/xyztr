@@ -7,7 +7,7 @@ import org.ipfs.api.Base58
 /**
   * Represents all data in a bubble.
   */
-case class Bubble(name: String, creatorName: String, startTime: Long, stoppedTime: Long, members: Set[BubbleMember]) extends Ordered[Bubble] {
+case class Bubble(name: String, creatorName: String, startTime: Long, stoppedTime: Long, members: Set[BubbleMember], bubbleType: String) extends Ordered[Bubble] {
   def compare(that: Bubble) = {
     val milliDiff = this.startTime - that.startTime
     if (milliDiff < 0) -1
@@ -25,15 +25,17 @@ object Bubble {
       new Date().getTime,
       0,
       friends.map(f => BubbleMember(f.name, Base58.encode(f.publicKey.getEncoded))) +
-        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)))
+        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)),
+    "")
 
-  def apply(name: String, creator: User, startTime: Long, stopTime: Long, friends: Set[Friend]): Bubble =
+  def apply(name: String, creator: User, startTime: Long, stopTime: Long, friends: Set[Friend], bubbleType: String): Bubble =
     Bubble(name,
       creator.name,
       startTime,
       stopTime,
       friends.map(f => BubbleMember(f.name, Base58.encode(f.publicKey.getEncoded))) +
-        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)))
+        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)),
+      bubbleType)
 }
 
 case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte])
