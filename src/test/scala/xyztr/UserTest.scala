@@ -39,11 +39,12 @@ class UserTest extends FlatSpec with Matchers {
     mats.friendRequest(fr)
 
     val bubble = BubbleCreator.create("Bubble name", mats, mats.friends.toSet)
-    val ipfsHash = IPFSProxy.send(bubble)
-    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptWithPublicKey(bubble.encryptionKey.getEncoded, f.publicKey)))
+    val bubbleEncryptionKey = Crypto.createSymmetricEncryptionKey
+    val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
+    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptWithPublicKey(bubbleEncryptionKey.getEncoded, f.publicKey)))
 
     val decryptedBubbleEncryptionKey = Crypto.decryptWithPrivateKey(invitations.head.encryptedEncryptionKey, bengt.privateKey())
-    decryptedBubbleEncryptionKey should be(bubble.encryptionKey.getEncoded)
+    decryptedBubbleEncryptionKey should be(bubbleEncryptionKey.getEncoded)
   }
 
   "Invited User" can "decrypt bubble from decrypted encryption key from bubble invitation, after being added to the bubble" in {
@@ -54,8 +55,9 @@ class UserTest extends FlatSpec with Matchers {
     mats.friendRequest(fr)
 
     val bubble = BubbleCreator.create("Bubble name", mats, mats.friends.toSet)
-    val ipfsHash = IPFSProxy.send(bubble)
-    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptSymmetricKeyWithPublicKey(bubble.encryptionKey, f.publicKey)))
+    val bubbleEncryptionKey = Crypto.createSymmetricEncryptionKey
+    val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
+    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptSymmetricKeyWithPublicKey(bubbleEncryptionKey, f.publicKey)))
 
     val decryptedBubbleEncryptionKey = Crypto.decryptSymmetricKeyWithPrivateKey(invitations.head.encryptedEncryptionKey, bengt.privateKey())
 
