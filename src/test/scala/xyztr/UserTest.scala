@@ -19,11 +19,6 @@ class UserTest extends FlatSpec with Matchers {
     mats.hasFriend(bengt.publicKey()) should be(true)
   }
 
-  "User" can "create bubbles" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bubble = new Bubble("Bubble name", mats, Set.empty)
-  }
-
   "User" can "add friends to bubbles" in {
     val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
     val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
@@ -51,7 +46,7 @@ class UserTest extends FlatSpec with Matchers {
     decryptedBubbleEncryptionKey should be(bubble.encryptionKey.getEncoded)
   }
 
-  ignore /* "Invited User" */ can "decrypt bubble from decrypted encryption key from bubble invitation, after being added to the bubble" in {
+  "Invited User" can "decrypt bubble from decrypted encryption key from bubble invitation, after being added to the bubble" in {
     val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
     val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
 

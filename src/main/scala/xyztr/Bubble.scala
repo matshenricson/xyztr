@@ -8,7 +8,7 @@ import org.ipfs.api.Base58
   * Represents all data in a bubble.
   */
 class Bubble(val name: String, creator: User, private val friends: Set[Friend]) {
-  val encryptionKey = Crypto.createSymmetricEncryptionKey()
+  val encryptionKey = Crypto.createSymmetricEncryptionKey()   // TODO: Remove the bubble encryption key from the bubble?
   val members = friends.map(f => BubbleMember(f.name, f.publicKey)) + BubbleMember(creator.name, creator.publicKey())
 
   def hashOfBytes() = Base58.encode(allDataAsBytes())
@@ -24,7 +24,7 @@ class Bubble(val name: String, creator: User, private val friends: Set[Friend]) 
   def hasMember(friend: Friend) = members.exists(_.publicKey == friend.publicKey)
 }
 
-case class BubbleInvitation(ipfsHash: Array[Byte], encryptedEncryptionKey: Array[Byte])
+case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte])
 
 case class BubbleMember(name: String, publicKey: PublicKey) {
   def allDataAsBytes(): Array[Byte] = List(name.getBytes("UTF-8"), publicKey.getEncoded).flatten.toArray

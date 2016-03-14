@@ -13,7 +13,7 @@ class User(val name: String, keyPair: KeyPair) {
 
   def friendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.name, fr.publicKey))
-    FriendResponse(name, keyPair.getPublic)
+    FriendResponse(name, publicKey())
   }
 
   def hasFriend(publicKeyOfPerhapsFriend: PublicKey) = friends.exists(_.publicKey.equals(publicKeyOfPerhapsFriend))
