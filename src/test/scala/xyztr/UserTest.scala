@@ -26,7 +26,7 @@ class UserTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
 
-    val bubble = new Bubble("Bubble name", mats, mats.friends.toSet)
+    val bubble = BubbleCreator.create("Bubble name", mats, mats.friends.toSet)
 
     bubble.hasMember(mats.friends.head) should be(true)
   }
@@ -38,7 +38,7 @@ class UserTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
 
-    val bubble = new Bubble("Bubble name", mats, mats.friends.toSet)
+    val bubble = BubbleCreator.create("Bubble name", mats, mats.friends.toSet)
     val ipfsHash = IPFSProxy.send(bubble)
     val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptWithPublicKey(bubble.encryptionKey.getEncoded, f.publicKey)))
 
@@ -53,7 +53,7 @@ class UserTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
 
-    val bubble = new Bubble("Bubble name", mats, mats.friends.toSet)
+    val bubble = BubbleCreator.create("Bubble name", mats, mats.friends.toSet)
     val ipfsHash = IPFSProxy.send(bubble)
     val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash, Crypto.encryptSymmetricKeyWithPublicKey(bubble.encryptionKey, f.publicKey)))
 

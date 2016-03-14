@@ -1,17 +1,14 @@
 package xyztr
 
 import java.security.{MessageDigest, PublicKey}
+import javax.crypto.SecretKey
 
 import org.ipfs.api.Base58
 
 /**
   * Represents all data in a bubble.
   */
-class Bubble(val name: String, private val creator: User, private val friends: Set[Friend]) {
-  val encryptionKey = Crypto.createSymmetricEncryptionKey()   // TODO: Remove the bubble encryption key from the bubble?
-  val members = friends.map(f => BubbleMember(f.name, f.publicKey)) + BubbleMember(creator.name, creator.publicKey())
-  val creatorName = creator.name
-
+case class Bubble(name: String, creatorName: String, members: Set[BubbleMember], encryptionKey: SecretKey) {
   def sha256OfData() = {
     val md = MessageDigest.getInstance("SHA-256")
     md.update(allDataAsBytes())
@@ -29,6 +26,12 @@ class Bubble(val name: String, private val creator: User, private val friends: S
     .flatten.toArray
 
   def hasMember(friend: Friend) = members.exists(_.publicKey == friend.publicKey)
+}
+
+object BubbleCreator {
+  def create(name: String, creator: User, friends: Set[Friend]) = {
+    Bubble(name, creator.name, friends.map(f => BubbleMember(f.name, f.publicKey)) + BubbleMember(creator.name, creator.publicKey()), Crypto.createSymmetricEncryptionKey)
+  }
 }
 
 case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte])
