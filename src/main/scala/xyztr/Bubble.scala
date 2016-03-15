@@ -1,8 +1,12 @@
 package xyztr
 
+import java.security.{PublicKey, PrivateKey}
 import java.util.Date
+import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
 
 import org.ipfs.api.Base58
+
 
 /**
   * Represents all data in a bubble.
@@ -39,6 +43,20 @@ object Bubble {
       encrypted)
 }
 
-case class BubbleInvitation(ipfsHash: String, encryptedEncryptionKey: Array[Byte] = Array.empty)
+case class BubbleHandle(ipfsHash: String, base58EncodedEncryptedEncryptionKey: Option[String] = None) {
+  def isBubbleEncrypted = base58EncodedEncryptedEncryptionKey.isDefined
+
+  def getDecryptedSymmetricEncryptionKey(privateKey: PrivateKey): Option[SecretKey] = isBubbleEncrypted match {
+    case false => None
+    case true  => Some(new SecretKeySpec(Crypto.decryptWithPrivateKey(Base58.decode(base58EncodedEncryptedEncryptionKey.get), privateKey), "AES"))
+  }
+}
+
+object BubbleHandle {
+  def apply(ipfsHash: String, secretKey: SecretKey, publicKey: PublicKey): BubbleHandle =
+    BubbleHandle(ipfsHash, Some(Base58.encode(Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey))))
+
+  def apply(ipfsHash: String): BubbleHandle = new BubbleHandle(ipfsHash)
+}
 
 case class BubbleMember(name: String, base58EncodedPublicKey: String)
