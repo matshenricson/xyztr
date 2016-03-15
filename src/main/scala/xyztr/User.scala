@@ -18,3 +18,13 @@ class User(val name: String, keyPair: KeyPair) {
 
   def hasFriend(publicKeyOfPerhapsFriend: PublicKey) = friends.exists(_.publicKey.equals(publicKeyOfPerhapsFriend))
 }
+
+object User {
+  def apply(name: String): User = {
+    new User(name, Crypto.createPrivatePublicPair())
+  }
+
+  def fromPassword(password: String) = {
+    val secretKey = Crypto.reCreateSecretKey(password)
+  }
+}

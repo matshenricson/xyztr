@@ -6,14 +6,14 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class UserTest extends FlatSpec with Matchers {
   "User" should "have a public key" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
     val publicKey = mats.publicKey()
     publicKey should not be null
   }
 
   "User" can "get friends" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
 
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
@@ -22,8 +22,8 @@ class UserTest extends FlatSpec with Matchers {
   }
 
   "User" can "add friends to bubbles" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
 
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
@@ -33,8 +33,8 @@ class UserTest extends FlatSpec with Matchers {
   }
 
   "Invited User" can "decrypt encryption key from bubble invitation, after being added to the bubble" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
 
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
@@ -49,8 +49,8 @@ class UserTest extends FlatSpec with Matchers {
   }
 
   "Invited User" can "decrypt bubble from decrypted encryption key from bubble invitation, after being added to the bubble" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
 
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
@@ -68,8 +68,8 @@ class UserTest extends FlatSpec with Matchers {
   }
 
   "User" can "inspect plain text bubble if its encryption is turned off" in {
-    val mats = new User("Mats Henricson", Crypto.createPrivatePublicPair())
-    val bengt = new User("Bengt Henricson", Crypto.createPrivatePublicPair())
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
 
     val fr = FriendRequest(bengt.name, bengt.publicKey())
     mats.friendRequest(fr)
