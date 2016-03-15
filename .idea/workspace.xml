@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/User.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/User.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
     </list>
     <ignored path="xyztr.iws" />
@@ -64,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Crypto.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Crypto.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Crypto.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37750384">
+            <state vertical-scroll-proportion="0.0">
               <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
               <folding>
                 <element signature="e#15#91#0" expanded="true" />
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserTest.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserTest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.86132514">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding>
                 <element signature="e#15#36#0" expanded="true" />
               </folding>
@@ -167,8 +165,8 @@
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/SignatureTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/Crypto.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/User.scala" />
-        <option value="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/BubbleTest.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
       </list>
     </option>
   </component>
@@ -958,7 +956,7 @@
       <workItem from="1457628290212" duration="2900000" />
       <workItem from="1457635486534" duration="21540000" />
       <workItem from="1457891533910" duration="8659000" />
-      <workItem from="1457901205769" duration="42010000" />
+      <workItem from="1457901205769" duration="42514000" />
     </task>
     <servers />
   </component>
@@ -995,7 +993,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77258000" />
+    <option name="totallyTimeSpent" value="77762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1418,16 +1416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-          <folding>
-            <element signature="e#15#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/SignatureTest.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45673078">
@@ -1462,10 +1450,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/Crypto.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37750384">
+        <state vertical-scroll-proportion="0.0">
           <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
           <folding>
             <element signature="e#15#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86132514">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

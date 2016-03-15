@@ -69,16 +69,9 @@ class UserTest extends FlatSpec with Matchers {
 
   "User" can "inspect plain text bubble if its encryption is turned off" in {
     val mats = User("Mats Henricson")
-    val bengt = User("Bengt Henricson")
-
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
-
-    val bubble = Bubble("Bubble name", mats, new Date().getTime, 0, mats.friends.toSet, "Landskamp", false)
-    val ipfsHash = IPFSProxy.send(bubble)
-    val invitations = mats.friends.map(f => BubbleInvitation(ipfsHash))
-
-    val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash)
+    val bubble = Bubble("Bubble name", mats, new Date().getTime, 0, Set.empty[Friend], "Landskamp", encrypted = false)
+    val ipfsHash = IPFSProxy.send(bubble)                        // No key needed to send to IPFS
+    val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash)      // No key needed to receive from IPFS
 
     fetchedBubbleFromIpfs should be(bubble)
   }
