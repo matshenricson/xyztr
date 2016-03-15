@@ -9,7 +9,7 @@ class SignatureTest extends FlatSpec with Matchers {
     val keyPair = Crypto.createPrivatePublicPair()
     val dsaSignature = Signature.getInstance("SHA1withRSA")
     dsaSignature.initSign(keyPair.getPrivate)
-    val someData = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
+    val someData = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
     dsaSignature.update(someData)
     val signature = dsaSignature.sign()
 

@@ -19,8 +19,8 @@ class RandomTest extends FlatSpec with Matchers {
     rg1.setSeed(seed)
     rg2.setSeed(seed)
 
-    val b1 = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
-    val b2 = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
+    val b1 = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
+    val b2 = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
     rg1.nextBytes(b1)
     rg2.nextBytes(b2)
     b1 should not be b2
@@ -31,8 +31,8 @@ class RandomTest extends FlatSpec with Matchers {
     val rg1 = new Random(seed)
     val rg2 = new Random(seed)
 
-    val b1 = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
-    val b2 = Bytes.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
+    val b1 = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
+    val b2 = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)
     rg1.nextBytes(b1)
     rg2.nextBytes(b2)
     b1 should be(b2)

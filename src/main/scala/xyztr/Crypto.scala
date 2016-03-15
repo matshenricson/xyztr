@@ -1,17 +1,28 @@
 package xyztr
 
 import java.security.{PublicKey, PrivateKey, KeyPairGenerator, SecureRandom}
-import javax.crypto.spec.SecretKeySpec
-import javax.crypto.{SecretKey, KeyGenerator, Cipher}
+import javax.crypto.spec.{PBEKeySpec, SecretKeySpec}
+import javax.crypto.{SecretKeyFactory, SecretKey, KeyGenerator, Cipher}
 
 object Crypto {
-  def createSymmetricEncryptionKey() = KeyGenerator.getInstance("AES").generateKey()
+  def toBytes(xs: Int*) = xs.map(_.toByte).toArray
+
+  def createNewSymmetricEncryptionKey() = KeyGenerator.getInstance("AES").generateKey()
 
   def createPrivatePublicPair() = {
     val keyGen = KeyPairGenerator.getInstance("RSA")
     val random = new SecureRandom()
     keyGen.initialize(1024, random)
     keyGen.generateKeyPair()
+  }
+
+  val salt = Crypto.toBytes(1, 2, 3, 4, 5, 6, 7, 8)    // TODO: Better salt ???
+
+  def reCreateSecretKey(password: String) = {
+    val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
+    val spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256)     // TODO: 256 ???
+    val tmp = factory.generateSecret(spec)
+    new SecretKeySpec(tmp.getEncoded(), "AES")
   }
 
   def encryptWithPublicKey(plainTextBytes: Array[Byte], publicKey: PublicKey): Array[Byte] = {
@@ -28,7 +39,6 @@ object Crypto {
 
   def encryptWithSymmetricKey(plainTextBytes: Array[Byte], aesKey: SecretKey): Array[Byte] = {
     val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
-
     cipher.init(Cipher.ENCRYPT_MODE, aesKey)
     cipher.doFinal(plainTextBytes)
   }
