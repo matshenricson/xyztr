@@ -64,7 +64,17 @@ class UserTest extends FlatSpec with Matchers {
 
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey)
 
-    fetchedBubbleFromIpfs should be(bubble)
+    fetchedBubbleFromIpfs.name should be(bubble.name)
+    fetchedBubbleFromIpfs.bubbleType should be(bubble.bubbleType)
+    fetchedBubbleFromIpfs.creatorName should be(bubble.creatorName)
+    fetchedBubbleFromIpfs.encrypted should be(bubble.encrypted)
+    fetchedBubbleFromIpfs.startTime should be(bubble.startTime)
+    fetchedBubbleFromIpfs.stopTime should be(bubble.stopTime)
+    fetchedBubbleFromIpfs.members.size should be(bubble.members.size)
+    fetchedBubbleFromIpfs.members.head.name should be(bubble.members.head.name)
+    fetchedBubbleFromIpfs.members.head.encodedPublicKey should be(bubble.members.head.encodedPublicKey)
+    fetchedBubbleFromIpfs.members.tail.head.name should be(bubble.members.tail.head.name)
+    fetchedBubbleFromIpfs.members.tail.head.encodedPublicKey should be(bubble.members.tail.head.encodedPublicKey)
   }
 
   "User" can "inspect plain text bubble if its encryption is turned off" in {
@@ -73,6 +83,14 @@ class UserTest extends FlatSpec with Matchers {
     val ipfsHash = IPFSProxy.send(bubble)                        // No key needed to send to IPFS
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash)      // No key needed to receive from IPFS
 
-    fetchedBubbleFromIpfs should be(bubble)
+    fetchedBubbleFromIpfs.name should be(bubble.name)
+    fetchedBubbleFromIpfs.bubbleType should be(bubble.bubbleType)
+    fetchedBubbleFromIpfs.creatorName should be(bubble.creatorName)
+    fetchedBubbleFromIpfs.encrypted should be(bubble.encrypted)
+    fetchedBubbleFromIpfs.startTime should be(bubble.startTime)
+    fetchedBubbleFromIpfs.stopTime should be(bubble.stopTime)
+    fetchedBubbleFromIpfs.members.size should be(bubble.members.size)
+    fetchedBubbleFromIpfs.members.head.name should be(bubble.members.head.name)
+    fetchedBubbleFromIpfs.members.head.encodedPublicKey should be(bubble.members.head.encodedPublicKey)
   }
 }

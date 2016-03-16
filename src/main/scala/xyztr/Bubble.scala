@@ -18,7 +18,7 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
     else 0
   }
 
-  def hasMember(friend: Friend) = members.exists(m => m.base58EncodedPublicKey == Base58.encode(friend.publicKey.getEncoded))    // TODO: We can do this simpler now
+  def hasMember(friend: Friend) = members.exists(m => m.encodedPublicKey.toSeq == friend.encodedPublicKey.toSeq)
 }
 
 object Bubble {
@@ -27,17 +27,17 @@ object Bubble {
       creator.name,
       new Date().getTime,
       0,
-      friends.map(f => BubbleMember(f.name, Base58.encode(f.publicKey.getEncoded))) +
-        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)),
-    "")
+      friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
+        BubbleMember(creator.name, creator.publicKey().getEncoded),
+      "")
 
   def apply(name: String, creator: User, startTime: Long, stopTime: Long, friends: Set[Friend], bubbleType: String, encrypted: Boolean): Bubble =
     Bubble(name,
       creator.name,
       startTime,
       stopTime,
-      friends.map(f => BubbleMember(f.name, Base58.encode(f.publicKey.getEncoded))) +
-        BubbleMember(creator.name, Base58.encode(creator.publicKey().getEncoded)),
+      friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
+        BubbleMember(creator.name, creator.publicKey().getEncoded),
       bubbleType,
       encrypted)
 }
@@ -58,4 +58,6 @@ object BubbleHandle {
   def apply(ipfsHash: String): BubbleHandle = new BubbleHandle(ipfsHash)
 }
 
-case class BubbleMember(name: String, base58EncodedPublicKey: String)     // TODO: Use Array[Byte] instead
+case class BubbleMember(name: String, encodedPublicKey: Array[Byte]) {
+  def publicKey = Crypto.getPublicKeyFromEncoded(encodedPublicKey)
+}
