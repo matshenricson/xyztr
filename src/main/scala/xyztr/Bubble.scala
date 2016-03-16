@@ -42,12 +42,12 @@ object Bubble {
       encrypted)
 }
 
-case class BubbleHandle(ipfsHash: String, base58EncodedEncryptedEncryptionKey: Option[String] = None) {
-  def isBubbleEncrypted = base58EncodedEncryptedEncryptionKey.isDefined
+case class BubbleHandle(ipfsHash: String, encodedEncryptedEncryptionKey: Option[String] = None) {
+  def isBubbleEncrypted = encodedEncryptedEncryptionKey.isDefined
 
-  def getDecryptedSymmetricEncryptionKey(privateKey: PrivateKey): Option[SecretKey] = isBubbleEncrypted match {
+  def decryptSecretKey(privateKey: PrivateKey): Option[SecretKey] = isBubbleEncrypted match {
     case false => None
-    case true  => Some(new SecretKeySpec(Crypto.decryptWithPrivateKey(Base58.decode(base58EncodedEncryptedEncryptionKey.get), privateKey), "AES"))
+    case true  => Some(new SecretKeySpec(Crypto.decryptWithPrivateKey(Base58.decode(encodedEncryptedEncryptionKey.get), privateKey), "AES"))
   }
 }
 

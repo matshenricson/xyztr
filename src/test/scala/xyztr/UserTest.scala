@@ -44,7 +44,7 @@ class UserTest extends FlatSpec with Matchers {
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
     val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.getDecryptedSymmetricEncryptionKey(bengt.privateKey()).get
+    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey()).get
     decryptedBubbleEncryptionKey.getEncoded should be(bubbleEncryptionKey.getEncoded)
   }
 
@@ -60,7 +60,7 @@ class UserTest extends FlatSpec with Matchers {
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
     val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.getDecryptedSymmetricEncryptionKey(bengt.privateKey()).get
+    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey()).get
 
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey)
 
