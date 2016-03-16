@@ -16,7 +16,7 @@ class User(val name: String, keyPair: KeyPair) {
     FriendResponse(name, publicKey())
   }
 
-  def hasFriend(publicKeyOfPerhapsFriend: PublicKey) = friends.exists(_.publicKey.equals(publicKeyOfPerhapsFriend))
+  def hasFriend(publicKeyOfPerhapsFriend: PublicKey) = friends.exists(_.publicKey.equals(publicKeyOfPerhapsFriend))   // TODO: Better compare Array[Byte]
 }
 
 object User {

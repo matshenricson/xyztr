@@ -1,18 +1,25 @@
 package xyztr
 
-import java.security.{PublicKey, PrivateKey, KeyPairGenerator, SecureRandom}
+import java.security.spec.X509EncodedKeySpec
+import java.security._
 import javax.crypto.spec.{PBEKeySpec, SecretKeySpec}
-import javax.crypto.{SecretKeyFactory, SecretKey, KeyGenerator, Cipher}
+import javax.crypto.{Cipher, KeyGenerator, SecretKey, SecretKeyFactory}
 
 object Crypto {
   def toBytes(xs: Int*) = xs.map(_.toByte).toArray
 
+  def getPublicKeyFromEncoded(encodedPublicKey: Array[Byte]) = {
+    val pubKeySpec = new X509EncodedKeySpec(encodedPublicKey)     // TODO: X509 ???
+    val keyFactory = KeyFactory.getInstance("RSA")
+    keyFactory.generatePublic(pubKeySpec)
+  }
+
   def createNewSymmetricEncryptionKey() = KeyGenerator.getInstance("AES").generateKey()
 
   def createPrivatePublicPair() = {
-    val keyGen = KeyPairGenerator.getInstance("RSA")
+    val keyGen = KeyPairGenerator.getInstance("RSA")   // TODO: RSA ???
     val random = new SecureRandom()
-    keyGen.initialize(1024, random)
+    keyGen.initialize(1024, random)                    // TODO: 1024 ???
     keyGen.generateKeyPair()
   }
 

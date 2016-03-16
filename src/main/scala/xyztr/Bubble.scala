@@ -7,7 +7,6 @@ import javax.crypto.spec.SecretKeySpec
 
 import org.ipfs.api.Base58
 
-
 /**
   * Represents all data in a bubble.
   */
@@ -19,7 +18,7 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
     else 0
   }
 
-  def hasMember(friend: Friend) = members.exists(f => f.base58EncodedPublicKey == Base58.encode(friend.publicKey.getEncoded))
+  def hasMember(friend: Friend) = members.exists(m => m.base58EncodedPublicKey == Base58.encode(friend.publicKey.getEncoded))    // TODO: We can do this simpler now
 }
 
 object Bubble {
@@ -59,4 +58,4 @@ object BubbleHandle {
   def apply(ipfsHash: String): BubbleHandle = new BubbleHandle(ipfsHash)
 }
 
-case class BubbleMember(name: String, base58EncodedPublicKey: String)
+case class BubbleMember(name: String, base58EncodedPublicKey: String)     // TODO: Use Array[Byte] instead
