@@ -26,5 +26,6 @@ object User {
 
   def fromPassword(password: String) = {
     val secretKey = Crypto.reCreateSecretKey(password)
+    // TODO: Now use this to fetch from external store
   }
 }

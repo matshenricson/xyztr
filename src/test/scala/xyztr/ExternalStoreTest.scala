@@ -52,4 +52,22 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     coreUserData.friends.head.name should be(newCoreUserData.friends.head.name)
     coreUserData.bubbles.size should be(newCoreUserData.bubbles.size)
   }
+
+  val password = "password"
+
+  "CoreUserData" can "be saved to file" in {
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
+
+    val fr = FriendRequest(bengt.name, bengt.publicKey())
+    mats.friendRequest(fr)
+
+    val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
+    val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))
+
+    val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
+
+    println("TURN ON, SUCKER!!!!!!")
+//    ExternalStore.save(coreUserData, secretKeyFromPassword)      // TODO: Turn on later
+  }
 }
