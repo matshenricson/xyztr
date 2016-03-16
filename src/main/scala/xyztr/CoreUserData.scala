@@ -1,7 +1,5 @@
 package xyztr
 
-import org.ipfs.api.Base58
-
 /**
   * Holds the data saved locally for a user. With this data, the user can get all its other XYZTR data.
   *
@@ -10,13 +8,15 @@ import org.ipfs.api.Base58
   */
 case class CoreUserData(name: String,
                         friends: Set[Friend],
-                        base58EncodedPublicKey: String,
-                        base58EncodedPrivateKey: String,
+                        encodedPublicKey: Array[Byte],
+                        encodedPrivateKey: Array[Byte],
                         bubbles: Set[BubbleHandle])
 
 object CoreUserData {
   def apply(user: User, bubbles: Set[BubbleHandle]): CoreUserData =
-    new CoreUserData(user.name, user.friends.toSet,
-      Base58.encode(user.publicKey().getEncoded),
-      Base58.encode(user.privateKey().getEncoded), bubbles)
+    new CoreUserData(user.name,
+      user.friends.toSet,
+      user.publicKey().getEncoded,
+      user.privateKey().getEncoded,
+      bubbles)
 }
