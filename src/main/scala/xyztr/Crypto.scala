@@ -27,7 +27,7 @@ object Crypto {
 
   def reCreateSecretKey(password: String) = {
     val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
-    val spec = new PBEKeySpec(password.toCharArray, salt, 65536, 256)     // TODO: 256 ???
+    val spec = new PBEKeySpec(password.toCharArray, salt, 65536, 128)     // Must use 128, can't use 256
     val tmp = factory.generateSecret(spec)
     new SecretKeySpec(tmp.getEncoded, "AES")
   }

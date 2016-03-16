@@ -53,7 +53,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     coreUserData.bubbles.size should be(newCoreUserData.bubbles.size)
   }
 
-  val password = "password"
+  val password = "PASSWORD"
 
   "CoreUserData" can "be saved to file" in {
     val mats = User("Mats Henricson")
@@ -67,7 +67,36 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
 
-    println("TURN ON, SUCKER!!!!!!")
-//    ExternalStore.save(coreUserData, secretKeyFromPassword)      // TODO: Turn on later
+    ExternalStore.save(coreUserData, secretKeyFromPassword)
+  }
+
+  "CoreUserData" can "be retrieved from file" in {
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
+
+    val fr = FriendRequest(bengt.name, bengt.publicKey())
+    mats.friendRequest(fr)
+
+    val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
+    val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))
+
+    val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
+
+    ExternalStore.save(coreUserData, secretKeyFromPassword)
+
+    val newCoreUserData = ExternalStore.retrieve(secretKeyFromPassword)
+
+    newCoreUserData.name should be(coreUserData.name)
+    newCoreUserData.base58EncodedPublicKey should be(coreUserData.base58EncodedPublicKey)
+    newCoreUserData.base58EncodedPrivateKey should be(coreUserData.base58EncodedPrivateKey)
+    newCoreUserData.friends.size should be(coreUserData.friends.size)
+    newCoreUserData.friends.size should be(1)
+    newCoreUserData.friends.head.encodedPublicKey should be(coreUserData.friends.head.encodedPublicKey)
+    newCoreUserData.friends.head.name should be(coreUserData.friends.head.name)
+    newCoreUserData.bubbles.size should be(coreUserData.bubbles.size)
+    newCoreUserData.bubbles.size should be(1)
+    newCoreUserData.bubbles.head.ipfsHash should be(coreUserData.bubbles.head.ipfsHash)
+    newCoreUserData.bubbles.head.encodedEncryptedEncryptionKey.get should be(coreUserData.bubbles.head.encodedEncryptedEncryptionKey.get)
+    newCoreUserData.bubbles.head.isBubbleEncrypted should be(coreUserData.bubbles.head.isBubbleEncrypted)
   }
 }

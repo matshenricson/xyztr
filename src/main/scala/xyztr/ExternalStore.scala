@@ -1,6 +1,7 @@
 package xyztr
 
 import java.io.FileOutputStream
+import java.nio.file.{Files, Paths}
 import javax.crypto.SecretKey
 
 import org.json4s.NoTypeHints
@@ -23,6 +24,11 @@ object ExternalStore {
     fos.close()
   }
 
-  //    val newCoreUserData = read[CoreUserData](json)
-  def retrieve(secretKey: SecretKey) = ???
+  def retrieve(secretKey: SecretKey) = {
+    val path = Paths.get(fileName)
+    val encryptedJsonBytes = Files.readAllBytes(path)
+    val jsonBytes = Crypto.decryptWithSymmetricKey(encryptedJsonBytes, secretKey)
+    val json = new String(jsonBytes, "UTF-8")
+    read[CoreUserData](json)
+  }
 }
