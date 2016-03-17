@@ -6,12 +6,12 @@ import java.security.PublicKey
   * Represents a friend in XYZTR, i.e. a person you share bubbles with.
   * The public key is used to encrypt the symmetric key used to encrypt bubbles and possibly the communication between friends..
   */
-case class Friend(name: String, encodedPublicKey: Array[Byte]) {
-  def publicKey = Crypto.getPublicKeyFromEncoded(encodedPublicKey)
+case class Friend(friendName: String, encodedPublicKeyOfFriend: Array[Byte]) {
+  def publicKey = Crypto.getPublicKeyFromEncoded(encodedPublicKeyOfFriend)
 }
 
 object Friend {
-  def apply(name: String, publicKey: PublicKey) = new Friend(name, publicKey.getEncoded)
+  def apply(friendName: String, publicKeyOfFriend: PublicKey) = new Friend(friendName, publicKeyOfFriend.getEncoded)
 }
 
 case class FriendRequest(nameOfSender: String, encodedPublicKeyOfSender: Array[Byte]) {

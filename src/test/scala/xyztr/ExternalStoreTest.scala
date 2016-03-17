@@ -29,7 +29,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     Crypto.encodedKeysAreEqual(coreUserData.encodedPublicKey, mats.publicKey.getEncoded) should be(true)
     coreUserData.name should be(mats.name)
     coreUserData.friends.size should be(1)
-    Crypto.encodedKeysAreEqual(coreUserData.friends.head.encodedPublicKey, bengt.publicKey.getEncoded) should be(true)
+    Crypto.encodedKeysAreEqual(coreUserData.friends.head.encodedPublicKeyOfFriend, bengt.publicKey.getEncoded) should be(true)
     coreUserData.bubbles.size should be(mats.bubbles.size)
   }
 
@@ -52,8 +52,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     coreUserData.encodedPublicKey should be(newCoreUserData.encodedPublicKey)
     coreUserData.name should be(newCoreUserData.name)
     coreUserData.friends.size should be(newCoreUserData.friends.size)
-    coreUserData.friends.head.encodedPublicKey should be(newCoreUserData.friends.head.encodedPublicKey)
-    coreUserData.friends.head.name should be(newCoreUserData.friends.head.name)
+    coreUserData.friends.head.encodedPublicKeyOfFriend should be(newCoreUserData.friends.head.encodedPublicKeyOfFriend)
+    coreUserData.friends.head.friendName should be(newCoreUserData.friends.head.friendName)
     coreUserData.bubbles.size should be(newCoreUserData.bubbles.size)
   }
 
@@ -95,8 +95,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     newCoreUserData.privateKeyBigIntegerComponentsAsStrings should be(coreUserData.privateKeyBigIntegerComponentsAsStrings)
     newCoreUserData.friends.size should be(coreUserData.friends.size)
     newCoreUserData.friends.size should be(1)
-    newCoreUserData.friends.head.encodedPublicKey should be(coreUserData.friends.head.encodedPublicKey)
-    newCoreUserData.friends.head.name should be(coreUserData.friends.head.name)
+    newCoreUserData.friends.head.encodedPublicKeyOfFriend should be(coreUserData.friends.head.encodedPublicKeyOfFriend)
+    newCoreUserData.friends.head.friendName should be(coreUserData.friends.head.friendName)
     newCoreUserData.bubbles.size should be(coreUserData.bubbles.size)
     newCoreUserData.bubbles.size should be(1)
     newCoreUserData.bubbles.head.ipfsHash should be(coreUserData.bubbles.head.ipfsHash)
@@ -134,7 +134,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     recreatedMats.bubbles.head.ipfsHash should be(ipfsHash)
     Crypto.encodedKeysAreEqual(recreatedMats.bubbles.head.encodedEncryptedEncryptionKey.get, mats.bubbles.head.encodedEncryptedEncryptionKey.get) should be(true)
     recreatedMats.friends.size should be(1)
-    Crypto.encodedKeysAreEqual(recreatedMats.friends.head.encodedPublicKey, bengt.publicKey.getEncoded) should be(true)
-    recreatedMats.friends.head.name should be(bengt.name)
+    Crypto.encodedKeysAreEqual(recreatedMats.friends.head.encodedPublicKeyOfFriend, bengt.publicKey.getEncoded) should be(true)
+    recreatedMats.friends.head.friendName should be(bengt.name)
   }
 }

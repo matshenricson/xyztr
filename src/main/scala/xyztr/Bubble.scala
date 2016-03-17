@@ -16,7 +16,7 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
     else 0
   }
 
-  def hasMember(friend: Friend) = members.exists(m => Crypto.encodedKeysAreEqual(m.encodedPublicKey, friend.encodedPublicKey))
+  def hasMember(friend: Friend) = members.exists(m => Crypto.encodedKeysAreEqual(m.encodedPublicKey, friend.encodedPublicKeyOfFriend))
 }
 
 object Bubble {
@@ -25,7 +25,7 @@ object Bubble {
       creator.name,
       new Date().getTime,
       0,
-      friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
+      friends.map(f => BubbleMember(f.friendName, f.publicKey.getEncoded)) +
         BubbleMember(creator.name, creator.publicKey.getEncoded),
       "")
 
@@ -34,7 +34,7 @@ object Bubble {
       creator.name,
       startTime,
       stopTime,
-      friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
+      friends.map(f => BubbleMember(f.friendName, f.publicKey.getEncoded)) +
         BubbleMember(creator.name, creator.publicKey.getEncoded),
       bubbleType,
       encrypted)
