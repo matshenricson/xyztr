@@ -15,18 +15,18 @@ class UserTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
-    mats.hasFriend(bengt.publicKey()) should be(true)
+    mats.hasFriend(bengt.publicKey().getEncoded) should be(true)
   }
 
   "User" can "add friends to bubbles" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     bubble.hasMember(mats.friends.head) should be(true)
@@ -36,8 +36,8 @@ class UserTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
@@ -52,8 +52,8 @@ class UserTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()

@@ -12,8 +12,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
@@ -33,8 +33,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
@@ -58,8 +58,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
     val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))
@@ -73,8 +73,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
-    val fr = FriendRequest(bengt.name, bengt.publicKey())
-    mats.friendRequest(fr)
+    val fr = FriendRequest(bengt)
+    mats.acceptFriendRequest(fr)
 
     val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
     val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))

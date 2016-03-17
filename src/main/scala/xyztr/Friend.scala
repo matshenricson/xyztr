@@ -14,20 +14,19 @@ object Friend {
   def apply(name: String, publicKey: PublicKey) = new Friend(name, publicKey.getEncoded)
 }
 
-// TODO: Do I really need the two classes below ????
-case class FriendRequest(name: String, encodedPublicKey: Array[Byte]) {
-  def publicKey = Crypto.getPublicKeyFromEncoded(encodedPublicKey)
+case class FriendRequest(nameOfSender: String, encodedPublicKeyOfSender: Array[Byte]) {
+  def publicKeyOfSender = Crypto.getPublicKeyFromEncoded(encodedPublicKeyOfSender)
 }
 
 object FriendRequest {
-  def apply(name: String, publicKey: PublicKey) = new FriendRequest(name, publicKey.getEncoded)
+  def apply(sender: User) = new FriendRequest(sender.name, sender.publicKey().getEncoded)
 }
 
-case class FriendResponse(name: String, encodedPublicKey: Array[Byte]) {
-  def publicKey = Crypto.getPublicKeyFromEncoded(encodedPublicKey)
+case class FriendResponse(nameOfSender: Option[String], encodedPublicKeyOfSender: Option[Array[Byte]]) {
+  def publicKeyOfSender = encodedPublicKeyOfSender.map(k => Crypto.getPublicKeyFromEncoded(k))
 }
 
 object FriendResponse {
-  def apply(name: String, publicKey: PublicKey) = new FriendResponse(name, publicKey.getEncoded)
-  def apply() = new FriendResponse("", Array.empty[Byte])    // This is a way of rejecting the friend request
+  def apply(sender: User): FriendResponse = FriendResponse(Some(sender.name), Some(sender.publicKey().getEncoded))
+  def apply(): FriendResponse = new FriendResponse(None, None)    // This is a way of rejecting the friend request
 }
