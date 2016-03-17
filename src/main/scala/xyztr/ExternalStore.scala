@@ -1,6 +1,7 @@
 package xyztr
 
 import java.io.FileOutputStream
+import java.math.BigInteger
 import java.nio.file.{Files, Paths}
 import javax.crypto.SecretKey
 
@@ -18,7 +19,9 @@ object ExternalStore {
 
   def fileName(secretKey: SecretKey) = "/home/mats/tmp/" + Base58.encode(secretKey.getEncoded)    // TODO: Probably won't work on other machine :-)
 
-  def save(coreUserData: CoreUserData, secretKey: SecretKey) = {
+  def save(user: User, password: String) = {
+    val coreUserData = CoreUserData(user)
+    val secretKey = Crypto.reCreateSecretKey(password)
     val json = writePretty(coreUserData)
     val encryptedJSONBytes = Crypto.encryptWithSymmetricKey(json.getBytes("UTF-8"), secretKey)
     val fos = new FileOutputStream(fileName(secretKey))
@@ -26,11 +29,20 @@ object ExternalStore {
     fos.close()
   }
 
-  def retrieve(secretKey: SecretKey) = {
+  def retrieve(password: String) = {
+    val secretKey = Crypto.reCreateSecretKey(password)
     val path = Paths.get(fileName(secretKey))
     val encryptedJsonBytes = Files.readAllBytes(path)
     val jsonBytes = Crypto.decryptWithSymmetricKey(encryptedJsonBytes, secretKey)
     val json = new String(jsonBytes, "UTF-8")
-    read[CoreUserData](json)
+    val coreUserData = read[CoreUserData](json)
+    val privateKey = Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.toSeq.map(s => new BigInteger(s)))
+    val publicKey = Crypto.getPublicKeyFromEncoded(coreUserData.encodedPublicKey)
+    val recreatedUser = new User(coreUserData.name, privateKey, publicKey)
+    coreUserData.bubbles.foreach(b => recreatedUser.bubbles.add(b))
+    coreUserData.friends.foreach(f => recreatedUser.friends.add(f))
+
+    recreatedUser
+
   }
 }

@@ -67,11 +67,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.acceptFriendRequest(fr)
 
     mats.bubbles.add(BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey))
-    val coreUserData = CoreUserData(mats)
 
-    val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
-
-    ExternalStore.save(coreUserData, secretKeyFromPassword)
+    ExternalStore.save(mats, password)
   }
 
   "CoreUserData" can "be retrieved from file" in {
@@ -82,26 +79,23 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.acceptFriendRequest(fr)
 
     mats.bubbles.add(BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey))
-    val coreUserData = CoreUserData(mats)
 
-    val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
+    ExternalStore.save(mats, password)
 
-    ExternalStore.save(coreUserData, secretKeyFromPassword)
+    val newUser = ExternalStore.retrieve(password)
 
-    val newCoreUserData = ExternalStore.retrieve(secretKeyFromPassword)
-
-    newCoreUserData.name should be(coreUserData.name)
-    newCoreUserData.encodedPublicKey should be(coreUserData.encodedPublicKey)
-    newCoreUserData.privateKeyBigIntegerComponentsAsStrings should be(coreUserData.privateKeyBigIntegerComponentsAsStrings)
-    newCoreUserData.friends.size should be(coreUserData.friends.size)
-    newCoreUserData.friends.size should be(1)
-    newCoreUserData.friends.head.encodedPublicKeyOfFriend should be(coreUserData.friends.head.encodedPublicKeyOfFriend)
-    newCoreUserData.friends.head.friendName should be(coreUserData.friends.head.friendName)
-    newCoreUserData.bubbles.size should be(coreUserData.bubbles.size)
-    newCoreUserData.bubbles.size should be(1)
-    newCoreUserData.bubbles.head.ipfsHash should be(coreUserData.bubbles.head.ipfsHash)
-    newCoreUserData.bubbles.head.encodedEncryptedEncryptionKey.get should be(coreUserData.bubbles.head.encodedEncryptedEncryptionKey.get)
-    newCoreUserData.bubbles.head.isBubbleEncrypted should be(coreUserData.bubbles.head.isBubbleEncrypted)
+    newUser.name should be(mats.name)
+    Crypto.publicKeysAreEqual(newUser.publicKey, mats.publicKey) should be(true)
+    Crypto.privateKeysAreEqual(newUser.privateKey, mats.privateKey) should be(true)
+    newUser.friends.size should be(mats.friends.size)
+    newUser.friends.size should be(1)
+    Crypto.encodedKeysAreEqual(newUser.friends.head.encodedPublicKeyOfFriend, mats.friends.head.encodedPublicKeyOfFriend) should be(true)
+    newUser.friends.head.friendName should be(mats.friends.head.friendName)
+    newUser.bubbles.size should be(mats.bubbles.size)
+    newUser.bubbles.size should be(1)
+    newUser.bubbles.head.ipfsHash should be(mats.bubbles.head.ipfsHash)
+    Crypto.encodedKeysAreEqual(newUser.bubbles.head.encodedEncryptedEncryptionKey.get, mats.bubbles.head.encodedEncryptedEncryptionKey.get) should be(true)
+    newUser.bubbles.head.isBubbleEncrypted should be(mats.bubbles.head.isBubbleEncrypted)
   }
 
   "User" can "be recreated from a password" in {
@@ -116,15 +110,12 @@ class ExternalStoreTest extends FlatSpec with Matchers {
       mats.acceptFriendRequest(fr)
 
       mats.bubbles.add(BubbleHandle(ipfsHash, symmetricKey, mats.publicKey))
-      val matsUserData = CoreUserData(mats)
 
-      val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
-
-      ExternalStore.save(matsUserData, secretKeyFromPassword)
+      ExternalStore.save(mats, password)
     }
 
     // OK, now lets try to load the user from disk
-    val recreatedMats = User.fromPassword(password)
+    val recreatedMats = ExternalStore.retrieve(password)
 
     // TODO: Can we use "recreatedMats shouldEqual mats" instead ????
     recreatedMats.name should be(mats.name)
