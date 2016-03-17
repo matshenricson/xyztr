@@ -20,6 +20,6 @@ class CryptoTest extends FlatSpec with Matchers {
     val key1 = Crypto.reCreateSecretKey(password)
     val key2 = Crypto.reCreateSecretKey(password)
 
-    key1.getEncoded should be(key2.getEncoded)
+    Crypto.secretKeysAreEqual(key1, key2) shouldBe true
   }
 }

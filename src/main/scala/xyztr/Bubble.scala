@@ -16,7 +16,7 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
     else 0
   }
 
-  def hasMember(friend: Friend) = members.exists(m => m.encodedPublicKey.toSeq == friend.encodedPublicKey.toSeq)
+  def hasMember(friend: Friend) = members.exists(m => Crypto.encodedKeysAreEqual(m.encodedPublicKey, friend.encodedPublicKey))
 }
 
 object Bubble {

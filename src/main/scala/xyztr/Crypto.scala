@@ -82,4 +82,9 @@ object Crypto {
     val decryptedSymmetricEncryptionKeyBytes = Crypto.decryptWithPrivateKey(encryptedEncryptionKey, privateKey)
     new SecretKeySpec(decryptedSymmetricEncryptionKeyBytes, "AES")
   }
+
+  def publicKeysAreEqual(pk1: PublicKey, pk2: PublicKey): Boolean = pk1.getEncoded.toSeq == pk2.getEncoded.toSeq
+  def privateKeysAreEqual(pk1: PrivateKey, pk2: PrivateKey): Boolean = pk1.getEncoded.toSeq == pk2.getEncoded.toSeq
+  def secretKeysAreEqual(sk1: SecretKey, sk2: SecretKey): Boolean = sk1.getEncoded.toSeq == sk2.getEncoded.toSeq
+  def encodedKeysAreEqual(ba1: Array[Byte], ba2: Array[Byte]): Boolean = ba1.toSeq == ba2.toSeq
 }

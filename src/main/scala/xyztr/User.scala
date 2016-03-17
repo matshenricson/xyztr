@@ -19,7 +19,7 @@ class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKe
 
   def handleFriendResponse(fr: FriendResponse) = if (fr.nameOfSender.isDefined) friends.add(Friend(fr.nameOfSender.get, fr.publicKeyOfSender.get))
 
-  def hasFriend(encodedPublicKeyOfPerhapsFriend: Array[Byte]) = friends.exists(_.encodedPublicKey.toSeq == encodedPublicKeyOfPerhapsFriend.toSeq)
+  def hasFriend(encodedPublicKeyOfPerhapsFriend: Array[Byte]) = friends.exists(f => Crypto.encodedKeysAreEqual(f.encodedPublicKey, encodedPublicKeyOfPerhapsFriend))
 }
 
 object User {

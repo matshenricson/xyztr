@@ -23,11 +23,13 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.bubbles.add(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
 
     val coreUserData = CoreUserData(mats)
-    Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.map(s => new BigInteger(s))).getEncoded.toSeq should be(mats.privateKey.getEncoded.toSeq)
-    coreUserData.encodedPublicKey.toSeq should be(mats.publicKey.getEncoded.toSeq)
+    Crypto.privateKeysAreEqual(
+      Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.map(s => new BigInteger(s))),
+      mats.privateKey) should be(true)
+    Crypto.encodedKeysAreEqual(coreUserData.encodedPublicKey, mats.publicKey.getEncoded) should be(true)
     coreUserData.name should be(mats.name)
     coreUserData.friends.size should be(1)
-    coreUserData.friends.head.encodedPublicKey.toSeq should be(bengt.publicKey.getEncoded)
+    Crypto.encodedKeysAreEqual(coreUserData.friends.head.encodedPublicKey, bengt.publicKey.getEncoded) should be(true)
     coreUserData.bubbles.size should be(mats.bubbles.size)
   }
 
@@ -126,13 +128,13 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     // TODO: Can we use "recreatedMats shouldEqual mats" instead ????
     recreatedMats.name should be(mats.name)
-    recreatedMats.privateKey.getEncoded.toSeq should be(mats.privateKey.getEncoded.toSeq)
-    recreatedMats.publicKey.getEncoded.toSeq should be(mats.publicKey.getEncoded.toSeq)
+    Crypto.privateKeysAreEqual(recreatedMats.privateKey, mats.privateKey) should be(true)
+    Crypto.publicKeysAreEqual(recreatedMats.publicKey, mats.publicKey) should be(true)
     recreatedMats.bubbles.size should be(1)
     recreatedMats.bubbles.head.ipfsHash should be(ipfsHash)
-    recreatedMats.bubbles.head.encodedEncryptedEncryptionKey.get.toSeq should be(mats.bubbles.head.encodedEncryptedEncryptionKey.get.toSeq)
+    Crypto.encodedKeysAreEqual(recreatedMats.bubbles.head.encodedEncryptedEncryptionKey.get, mats.bubbles.head.encodedEncryptedEncryptionKey.get) should be(true)
     recreatedMats.friends.size should be(1)
-    recreatedMats.friends.head.encodedPublicKey.toSeq should be(bengt.publicKey.getEncoded.toSeq)
+    Crypto.encodedKeysAreEqual(recreatedMats.friends.head.encodedPublicKey, bengt.publicKey.getEncoded) should be(true)
     recreatedMats.friends.head.name should be(bengt.name)
   }
 }
