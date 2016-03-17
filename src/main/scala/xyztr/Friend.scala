@@ -19,7 +19,7 @@ case class FriendRequest(nameOfSender: String, encodedPublicKeyOfSender: Array[B
 }
 
 object FriendRequest {
-  def apply(sender: User) = new FriendRequest(sender.name, sender.publicKey().getEncoded)
+  def apply(sender: User) = new FriendRequest(sender.name, sender.publicKey.getEncoded)
 }
 
 case class FriendResponse(nameOfSender: Option[String], encodedPublicKeyOfSender: Option[Array[Byte]]) {
@@ -27,6 +27,6 @@ case class FriendResponse(nameOfSender: Option[String], encodedPublicKeyOfSender
 }
 
 object FriendResponse {
-  def apply(sender: User): FriendResponse = FriendResponse(Some(sender.name), Some(sender.publicKey().getEncoded))
+  def apply(sender: User): FriendResponse = FriendResponse(Some(sender.name), Some(sender.publicKey.getEncoded))
   def apply(): FriendResponse = new FriendResponse(None, None)    // This is a way of rejecting the friend request
 }

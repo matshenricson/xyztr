@@ -9,14 +9,15 @@ package xyztr
 case class CoreUserData(name: String,
                         friends: Set[Friend],
                         encodedPublicKey: Array[Byte],
-                        encodedPrivateKey: Array[Byte],
+                        privateKeyBigIntegerComponentsAsStrings: List[String],
                         bubbles: Set[BubbleHandle])
 
 object CoreUserData {
-  def apply(user: User, bubbles: Set[BubbleHandle]): CoreUserData =
+  def apply(user: User): CoreUserData = {
     new CoreUserData(user.name,
       user.friends.toSet,
-      user.publicKey().getEncoded,
-      user.privateKey().getEncoded,
-      bubbles)
+      user.publicKey.getEncoded,
+      Crypto.createPrivateKeyBigIntegerComponentsAsStrings(user.privateKey),
+      user.bubbles.toSet)
+  }
 }

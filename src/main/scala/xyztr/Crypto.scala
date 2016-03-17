@@ -1,9 +1,12 @@
 package xyztr
 
-import java.security.spec.X509EncodedKeySpec
+import java.math.BigInteger
 import java.security._
+import java.security.spec.{RSAPrivateCrtKeySpec, X509EncodedKeySpec}
 import javax.crypto.spec.{PBEKeySpec, SecretKeySpec}
 import javax.crypto.{Cipher, KeyGenerator, SecretKey, SecretKeyFactory}
+
+import sun.security.rsa.RSAPrivateCrtKeyImpl
 
 object Crypto {
   def toBytes(xs: Int*) = xs.map(_.toByte).toArray
@@ -12,6 +15,25 @@ object Crypto {
     val pubKeySpec = new X509EncodedKeySpec(encodedPublicKey)     // TODO: X509 ???
     val keyFactory = KeyFactory.getInstance("RSA")
     keyFactory.generatePublic(pubKeySpec)
+  }
+
+  def createPrivateKeyBigIntegerComponentsAsStrings(pk: PrivateKey) = {
+    val spec = pk.asInstanceOf[RSAPrivateCrtKeyImpl]
+    List(
+      spec.getModulus.toString,          // BigInteger modulus
+      spec.getPublicExponent.toString,   // BigInteger publicExponent
+      spec.getPrivateExponent.toString,  // BigInteger privateExponent
+      spec.getPrimeP.toString,           // BigInteger primeP
+      spec.getPrimeQ.toString,           // BigInteger primeQ
+      spec.getPrimeExponentP.toString,   // BigInteger primeExponentP
+      spec.getPrimeExponentQ.toString,   // BigInteger primeExponentQ
+      spec.getCrtCoefficient.toString)   // BigInteger crtCoefficient
+  }
+
+  def getPrivateKeyFromBigIntegers(components: Seq[BigInteger]) = {
+    val pubKeySpec = new RSAPrivateCrtKeySpec(components(0), components(1), components(2), components(3), components(4), components(5), components(6), components(7))
+    val keyFactory = KeyFactory.getInstance("RSA")
+    keyFactory.generatePrivate(pubKeySpec)
   }
 
   def createNewSymmetricEncryptionKey() = KeyGenerator.getInstance("AES").generateKey()
@@ -54,10 +76,6 @@ object Crypto {
     val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
     cipher.init(Cipher.DECRYPT_MODE, aesKey)
     cipher.doFinal(cipherTextBytes)
-  }
-
-  def encryptSymmetricKeyWithPublicKey(secretKey: SecretKey, publicKey: PublicKey): Array[Byte] = {
-    Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey)
   }
 
   def decryptSymmetricKeyWithPrivateKey(encryptedEncryptionKey: Array[Byte], privateKey: PrivateKey): SecretKey = {

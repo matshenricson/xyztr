@@ -21,7 +21,7 @@ class UserToUserChannelTest extends FlatSpec with Matchers {
     bengt.acceptFriendRequest(receivedFriendRequest)
 
     // Mats should now be Bengts friend
-    bengt.hasFriend(mats.publicKey().getEncoded)
+    bengt.hasFriend(mats.publicKey.getEncoded)
   }
 
   "FriendResponse" can "be sent to someone" in {
@@ -39,11 +39,11 @@ class UserToUserChannelTest extends FlatSpec with Matchers {
 
     // Bengt sends the response back to Mats
     UserToUserChannel.sendFriendResponse(receivedFriendRequest.encodedPublicKeyOfSender, response)
-    val responseFromBengt = UserToUserChannel.getFriendResponse(mats.publicKey().getEncoded).get
+    val responseFromBengt = UserToUserChannel.getFriendResponse(mats.publicKey.getEncoded).get
     mats.handleFriendResponse(responseFromBengt)
 
     // Bengt should now be Mats friend
-    bengt.hasFriend(mats.publicKey().getEncoded)
+    bengt.hasFriend(mats.publicKey.getEncoded)
   }
 
   "BubbleHandle" can "be sent to a friend" in {
@@ -59,8 +59,8 @@ class UserToUserChannelTest extends FlatSpec with Matchers {
     UserToUserChannel.sendBubbleHandle(friend.encodedPublicKey, sentBubbleHandle)
 
     // Bengt gets the BubbleHandle and can decrypt the symmetric key
-    val receivedBubbleHandle = UserToUserChannel.getBubbleHandle(bengt.publicKey().getEncoded).getOrElse(throw new IllegalStateException("What?"))
-    val decryptedSymmetricKey = receivedBubbleHandle.decryptSecretKey(bengt.privateKey())
+    val receivedBubbleHandle = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded).getOrElse(throw new IllegalStateException("What?"))
+    val decryptedSymmetricKey = receivedBubbleHandle.decryptSecretKey(bengt.privateKey)
     decryptedSymmetricKey.get.getAlgorithm should be("AES")
   }
 }

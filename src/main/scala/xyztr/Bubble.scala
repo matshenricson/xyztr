@@ -1,11 +1,9 @@
 package xyztr
 
-import java.security.{PublicKey, PrivateKey}
+import java.security.{PrivateKey, PublicKey}
 import java.util.Date
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
-
-import org.ipfs.api.Base58
 
 /**
   * Represents all data in a bubble.
@@ -28,7 +26,7 @@ object Bubble {
       new Date().getTime,
       0,
       friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
-        BubbleMember(creator.name, creator.publicKey().getEncoded),
+        BubbleMember(creator.name, creator.publicKey.getEncoded),
       "")
 
   def apply(name: String, creator: User, startTime: Long, stopTime: Long, friends: Set[Friend], bubbleType: String, encrypted: Boolean): Bubble =
@@ -37,23 +35,23 @@ object Bubble {
       startTime,
       stopTime,
       friends.map(f => BubbleMember(f.name, f.publicKey.getEncoded)) +
-        BubbleMember(creator.name, creator.publicKey().getEncoded),
+        BubbleMember(creator.name, creator.publicKey.getEncoded),
       bubbleType,
       encrypted)
 }
 
-case class BubbleHandle(ipfsHash: String, encodedEncryptedEncryptionKey: Option[String] = None) {
+case class BubbleHandle(ipfsHash: String, encodedEncryptedEncryptionKey: Option[Array[Byte]] = None) {
   def isBubbleEncrypted = encodedEncryptedEncryptionKey.isDefined
 
   def decryptSecretKey(privateKey: PrivateKey): Option[SecretKey] = isBubbleEncrypted match {
     case false => None
-    case true  => Some(new SecretKeySpec(Crypto.decryptWithPrivateKey(Base58.decode(encodedEncryptedEncryptionKey.get), privateKey), "AES"))
+    case true  => Some(new SecretKeySpec(Crypto.decryptWithPrivateKey(encodedEncryptedEncryptionKey.get, privateKey), "AES"))
   }
 }
 
 object BubbleHandle {
   def apply(ipfsHash: String, secretKey: SecretKey, publicKey: PublicKey): BubbleHandle =
-    BubbleHandle(ipfsHash, Some(Base58.encode(Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey))))
+    BubbleHandle(ipfsHash, Some(Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey)))
 
   def apply(ipfsHash: String): BubbleHandle = new BubbleHandle(ipfsHash)
 }

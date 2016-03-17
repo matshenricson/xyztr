@@ -1,5 +1,7 @@
 package xyztr
 
+import java.math.BigInteger
+
 import org.json4s.NoTypeHints
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization._
@@ -18,15 +20,15 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
+    mats.bubbles.add(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
 
-    val coreUserData = CoreUserData(mats, Set(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey())))
-    coreUserData.encodedPrivateKey.toSeq should be(mats.privateKey().getEncoded.toSeq)
-    coreUserData.encodedPublicKey.toSeq should be(mats.publicKey().getEncoded.toSeq)
+    val coreUserData = CoreUserData(mats)
+    Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.map(s => new BigInteger(s))).getEncoded.toSeq should be(mats.privateKey.getEncoded.toSeq)
+    coreUserData.encodedPublicKey.toSeq should be(mats.publicKey.getEncoded.toSeq)
     coreUserData.name should be(mats.name)
     coreUserData.friends.size should be(1)
-    coreUserData.friends.head.encodedPublicKey.toSeq should be(bengt.publicKey().getEncoded)
-    coreUserData.bubbles.size should be(1)
+    coreUserData.friends.head.encodedPublicKey.toSeq should be(bengt.publicKey.getEncoded)
+    coreUserData.bubbles.size should be(mats.bubbles.size)
   }
 
   "CoreUserData" can "be serialized and deserialized to JSON" in {
@@ -38,12 +40,13 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
-    val coreUserData = CoreUserData(mats, Set(BubbleHandle("ipfsHash", bubbleEncryptionKey, mats.publicKey())))
+    mats.bubbles.add(BubbleHandle("ipfsHash", bubbleEncryptionKey, mats.publicKey))
+    val coreUserData = CoreUserData(mats)
 
     val json = write(coreUserData)
     val newCoreUserData = read[CoreUserData](json)
 
-    coreUserData.encodedPrivateKey should be(newCoreUserData.encodedPrivateKey)
+    coreUserData.privateKeyBigIntegerComponentsAsStrings should be(newCoreUserData.privateKeyBigIntegerComponentsAsStrings)
     coreUserData.encodedPublicKey should be(newCoreUserData.encodedPublicKey)
     coreUserData.name should be(newCoreUserData.name)
     coreUserData.friends.size should be(newCoreUserData.friends.size)
@@ -61,8 +64,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt)
     mats.acceptFriendRequest(fr)
 
-    val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
-    val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))
+    mats.bubbles.add(BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey))
+    val coreUserData = CoreUserData(mats)
 
     val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
 
@@ -76,8 +79,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt)
     mats.acceptFriendRequest(fr)
 
-    val fakeBubbleHandle = BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey())
-    val coreUserData = CoreUserData(mats, Set(fakeBubbleHandle))
+    mats.bubbles.add(BubbleHandle("fakeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), mats.publicKey))
+    val coreUserData = CoreUserData(mats)
 
     val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
 
@@ -87,7 +90,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     newCoreUserData.name should be(coreUserData.name)
     newCoreUserData.encodedPublicKey should be(coreUserData.encodedPublicKey)
-    newCoreUserData.encodedPrivateKey should be(coreUserData.encodedPrivateKey)
+    newCoreUserData.privateKeyBigIntegerComponentsAsStrings should be(coreUserData.privateKeyBigIntegerComponentsAsStrings)
     newCoreUserData.friends.size should be(coreUserData.friends.size)
     newCoreUserData.friends.size should be(1)
     newCoreUserData.friends.head.encodedPublicKey should be(coreUserData.friends.head.encodedPublicKey)
@@ -97,5 +100,39 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     newCoreUserData.bubbles.head.ipfsHash should be(coreUserData.bubbles.head.ipfsHash)
     newCoreUserData.bubbles.head.encodedEncryptedEncryptionKey.get should be(coreUserData.bubbles.head.encodedEncryptedEncryptionKey.get)
     newCoreUserData.bubbles.head.isBubbleEncrypted should be(coreUserData.bubbles.head.isBubbleEncrypted)
+  }
+
+  "User" can "be recreated from a password" in {
+    val mats = User("Mats Henricson")
+    val bengt = User("Bengt Henricson")
+    val ipfsHash = "fakeIpfsHash"
+    val symmetricKey = Crypto.createNewSymmetricEncryptionKey()
+
+    // Create in different scope, so we aren't tempted to use after the load from disk
+    {
+      val fr = FriendRequest(bengt)
+      mats.acceptFriendRequest(fr)
+
+      mats.bubbles.add(BubbleHandle(ipfsHash, symmetricKey, mats.publicKey))
+      val matsUserData = CoreUserData(mats)
+
+      val secretKeyFromPassword = Crypto.reCreateSecretKey(password)
+
+      ExternalStore.save(matsUserData, secretKeyFromPassword)
+    }
+
+    // OK, now lets try to load the user from disk
+    val recreatedMats = User.fromPassword(password)
+
+    // TODO: Can we use "recreatedMats shouldEqual mats" instead ????
+    recreatedMats.name should be(mats.name)
+    recreatedMats.privateKey.getEncoded.toSeq should be(mats.privateKey.getEncoded.toSeq)
+    recreatedMats.publicKey.getEncoded.toSeq should be(mats.publicKey.getEncoded.toSeq)
+    recreatedMats.bubbles.size should be(1)
+    recreatedMats.bubbles.head.ipfsHash should be(ipfsHash)
+    recreatedMats.bubbles.head.encodedEncryptedEncryptionKey.get.toSeq should be(mats.bubbles.head.encodedEncryptedEncryptionKey.get.toSeq)
+    recreatedMats.friends.size should be(1)
+    recreatedMats.friends.head.encodedPublicKey.toSeq should be(bengt.publicKey.getEncoded.toSeq)
+    recreatedMats.friends.head.name should be(bengt.name)
   }
 }

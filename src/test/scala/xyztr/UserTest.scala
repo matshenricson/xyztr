@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class UserTest extends FlatSpec with Matchers {
   "User" should "have a public key" in {
     val mats = User("Mats Henricson")
-    val publicKey = mats.publicKey()
+    val publicKey = mats.publicKey
     publicKey should not be null
   }
 
@@ -18,7 +18,7 @@ class UserTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt)
     mats.acceptFriendRequest(fr)
 
-    mats.hasFriend(bengt.publicKey().getEncoded) should be(true)
+    mats.hasFriend(bengt.publicKey.getEncoded) should be(true)
   }
 
   "User" can "add friends to bubbles" in {
@@ -44,7 +44,7 @@ class UserTest extends FlatSpec with Matchers {
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
     val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey()).get
+    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey).get
     decryptedBubbleEncryptionKey.getEncoded should be(bubbleEncryptionKey.getEncoded)
   }
 
@@ -60,7 +60,7 @@ class UserTest extends FlatSpec with Matchers {
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
     val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey()).get
+    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey).get
 
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey)
 
