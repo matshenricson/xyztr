@@ -16,11 +16,11 @@ object UserToUserChannel {
   implicit val formats = Serialization.formats(NoTypeHints)
 
   def sendFriendRequest(to: String, request: FriendRequest) = friendRequests.put(to, read[FriendRequest](write(request)))
-  def getFriendRequest(to: String) = friendRequests.get(to)
+  def getFriendRequest(to: String) = friendRequests.get(to)                 // TODO: Should return a collection of FriendRequest
 
   def sendFriendResponse(to: Array[Byte], response: FriendResponse) = friendResponses.put(to.toSet, read[FriendResponse](write(response)))
-  def getFriendResponse(to: Array[Byte]) = friendResponses.get(to.toSet)
+  def getFriendResponse(to: Array[Byte]) = friendResponses.get(to.toSet)    // TODO: Should return a collection of FriendResponse
 
   def sendBubbleHandle(to: Array[Byte], handle: BubbleHandle) = bubbleHandles.put(to.toSet, read[BubbleHandle](write(handle)))
-  def getBubbleHandle(to: Array[Byte]) = bubbleHandles.get(to.toSet)
+  def getBubbleHandle(to: Array[Byte]) = bubbleHandles.get(to.toSet)        // TODO: Should return a collection of BubbleHandle
 }

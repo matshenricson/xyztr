@@ -59,7 +59,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
   val password = "PASSWORD"
 
-  "CoreUserData" can "be saved to file" in {
+  "User" can "be saved to file" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
@@ -71,7 +71,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     ExternalStore.save(mats, password)
   }
 
-  "CoreUserData" can "be retrieved from file" in {
+  "User" can "be retrieved from file" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 

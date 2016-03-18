@@ -32,7 +32,7 @@ class UserTest extends FlatSpec with Matchers {
     bubble.hasMember(mats.friends.head) should be(true)
   }
 
-  "Invited User" can "decrypt encryption key from bubble invitation, after being added to the bubble" in {
+  "Invited User" can "decrypt encryption key from bubble handle, after being added to the bubble" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
@@ -42,13 +42,13 @@ class UserTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
+    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey).get
+    val decryptedBubbleEncryptionKey = handles.head.decryptSecretKey(bengt.privateKey).get
     decryptedBubbleEncryptionKey.getEncoded should be(bubbleEncryptionKey.getEncoded)
   }
 
-  "Invited User" can "decrypt bubble from decrypted encryption key from bubble invitation, after being added to the bubble" in {
+  "Invited User" can "decrypt bubble from decrypted encryption key from bubble handle, after being added to the bubble" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
 
@@ -58,9 +58,9 @@ class UserTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val invitations = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
+    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
 
-    val decryptedBubbleEncryptionKey = invitations.head.decryptSecretKey(bengt.privateKey).get
+    val decryptedBubbleEncryptionKey = handles.head.decryptSecretKey(bengt.privateKey).get
 
     val fetchedBubbleFromIpfs = IPFSProxy.receive(ipfsHash, decryptedBubbleEncryptionKey)
 
