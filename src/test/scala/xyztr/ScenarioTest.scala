@@ -13,7 +13,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     matsSendsFriendRequestToBengt()
     bengtHandlesFriendRequestAndSendsBackFriendResponse()
     matsHandlesFriendResponseFromBengt()
-    matsCreatesBubbleAndSendsBubbleHandleToBengt()
+    matsCreatesBubbleSendsItToIpfsAndSendsBubbleHandleToBengt()
     bengtHandlesBubbleHandle()
     checkThatMatsAndBengtAreMutualFriends()
     checkThatBothHaveTheSameBubbleHandles()
@@ -108,7 +108,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     ExternalStore.save(bengt, bengtPassword)
   }
 
-  def matsCreatesBubbleAndSendsBubbleHandleToBengt() = {
+  def matsCreatesBubbleSendsItToIpfsAndSendsBubbleHandleToBengt() = {
     val mats = ExternalStore.retrieve(matsPassword)
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
