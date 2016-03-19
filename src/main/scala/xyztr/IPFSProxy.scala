@@ -3,6 +3,7 @@ package xyztr
 import javax.crypto.SecretKey
 
 import org.ipfs.api.{IPFS, Multihash, NamedStreamable}
+import org.jboss.netty.util.CharsetUtil
 import org.json4s.NoTypeHints
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization.{read, write, writePretty}
@@ -24,7 +25,7 @@ object IPFSProxy {
     */
   def send(bubble: Bubble, bubbleEncryptionKey: SecretKey): String = {
     val bubbleJSONString = write(bubble)
-    val bubbleJSONBytes = bubbleJSONString.getBytes("UTF-8")
+    val bubbleJSONBytes = bubbleJSONString.getBytes(CharsetUtil.UTF_8)
     val encryptedBubbleJSONBytes = Crypto.encryptWithSymmetricKey(bubbleJSONBytes, bubbleEncryptionKey)
     val data = new NamedStreamable.ByteArrayWrapper(encryptedBubbleJSONBytes)
     val merkleNode = ipfs.add(data)
@@ -42,7 +43,7 @@ object IPFSProxy {
     val hash = Multihash.fromBase58(ipfsHash)
     val encryptedBubbleJSONBytes = ipfs.cat(hash)
     val bubbleJSONBytes = Crypto.decryptWithSymmetricKey(encryptedBubbleJSONBytes, bubbleDecryptionKey)
-    val bubbleJSONString = new String(bubbleJSONBytes, "UTF-8")
+    val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
     read[Bubble](bubbleJSONString)
   }
 
@@ -54,7 +55,7 @@ object IPFSProxy {
     */
   def send(bubble: Bubble): String = {
     val bubbleJSONString = writePretty(bubble)
-    val bubbleJSONBytes = bubbleJSONString.getBytes("UTF-8")
+    val bubbleJSONBytes = bubbleJSONString.getBytes(CharsetUtil.UTF_8)
     val data = new NamedStreamable.ByteArrayWrapper(bubbleJSONBytes)
     val merkleNode = ipfs.add(data)
     merkleNode.hash.toBase58
@@ -69,7 +70,7 @@ object IPFSProxy {
   def receive(ipfsHash: String): Bubble = {
     val hash = Multihash.fromBase58(ipfsHash)
     val bubbleJSONBytes = ipfs.cat(hash)
-    val bubbleJSONString = new String(bubbleJSONBytes, "UTF-8")
+    val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
     read[Bubble](bubbleJSONString)
   }
 }

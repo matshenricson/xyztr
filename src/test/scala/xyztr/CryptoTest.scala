@@ -1,5 +1,6 @@
 package xyztr
 
+import org.jboss.netty.util.CharsetUtil
 import org.scalatest.{FlatSpec, Matchers}
 
 class CryptoTest extends FlatSpec with Matchers {
@@ -7,10 +8,10 @@ class CryptoTest extends FlatSpec with Matchers {
     val stringToEncrypt = "Hello world"
     val aesKey = Crypto.createNewSymmetricEncryptionKey()
 
-    val encryptedBytes = Crypto.encryptWithSymmetricKey(stringToEncrypt.getBytes("UTF-8"), aesKey)
+    val encryptedBytes = Crypto.encryptWithSymmetricKey(stringToEncrypt.getBytes(CharsetUtil.UTF_8), aesKey)
     val decryptedBytes = Crypto.decryptWithSymmetricKey(encryptedBytes, aesKey)
 
-    val decryptedString = new String(decryptedBytes, "UTF-8")
+    val decryptedString = new String(decryptedBytes, CharsetUtil.UTF_8)
     decryptedString should be(stringToEncrypt)
   }
 

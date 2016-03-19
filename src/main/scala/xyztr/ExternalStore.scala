@@ -6,6 +6,7 @@ import java.nio.file.{Files, Paths}
 import javax.crypto.SecretKey
 
 import org.ipfs.api.Base58
+import org.jboss.netty.util.CharsetUtil
 import org.json4s.NoTypeHints
 import org.json4s.native.Serialization
 import org.json4s.native.Serialization._
@@ -23,7 +24,7 @@ object ExternalStore {
     val coreUserData = CoreUserData(user)
     val secretKey = Crypto.reCreateSecretKey(password)
     val json = writePretty(coreUserData)
-    val encryptedJSONBytes = Crypto.encryptWithSymmetricKey(json.getBytes("UTF-8"), secretKey)
+    val encryptedJSONBytes = Crypto.encryptWithSymmetricKey(json.getBytes(CharsetUtil.UTF_8), secretKey)
     val fos = new FileOutputStream(fileName(secretKey))
     fos.write(encryptedJSONBytes)
     fos.close()
@@ -34,7 +35,7 @@ object ExternalStore {
     val path = Paths.get(fileName(secretKey))
     val encryptedJsonBytes = Files.readAllBytes(path)
     val jsonBytes = Crypto.decryptWithSymmetricKey(encryptedJsonBytes, secretKey)
-    val json = new String(jsonBytes, "UTF-8")
+    val json = new String(jsonBytes, CharsetUtil.UTF_8)
     val coreUserData = read[CoreUserData](json)
     val privateKey = Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.toSeq.map(s => new BigInteger(s)))
     val publicKey = Crypto.getPublicKeyFromEncoded(coreUserData.encodedPublicKey)

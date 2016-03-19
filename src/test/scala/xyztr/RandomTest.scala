@@ -3,6 +3,7 @@ package xyztr
 import java.security.SecureRandom
 import java.util.Random
 
+import org.jboss.netty.util.CharsetUtil
 import org.scalatest.{FlatSpec, Matchers}
 
 class RandomTest extends FlatSpec with Matchers {
@@ -13,7 +14,7 @@ class RandomTest extends FlatSpec with Matchers {
   }
 
   "SecureRandom" should "generate completely random numbers even if the same seed is used" in {
-    val seed = new String("seed").getBytes("UTF-8")
+    val seed = new String("seed").getBytes(CharsetUtil.UTF_8)
     val rg1 = new SecureRandom()
     val rg2 = new SecureRandom()
     rg1.setSeed(seed)
