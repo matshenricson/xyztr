@@ -6,8 +6,9 @@ import java.security.{PrivateKey, PublicKey}
   * Represents the user of this program. Has a name, friends and private/public keys.
   */
 class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKey) {
-  val friends = new scala.collection.mutable.HashSet[Friend]()
-  val bubblesMap = new scala.collection.mutable.HashMap[Array[Byte], BubbleHandle]()    // TODO: Mke into a multimap later
+  val friends = new scala.collection.mutable.HashSet[Friend]()                                  // TODO: Make private ???
+  private val bubblesMap = new scala.collection.mutable.HashMap[Array[Byte], BubbleHandle]()    // TODO: Make into a multimap later
+  val getAllBubbles = bubblesMap.values
 
   def addBubble(bubble: BubbleHandle) = bubblesMap.put(bubble.encodedEncryptedEncryptionKey, bubble)
 

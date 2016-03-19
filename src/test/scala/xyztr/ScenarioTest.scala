@@ -37,10 +37,10 @@ class ScenarioTest extends FlatSpec with Matchers {
     val mats = ExternalStore.retrieve(matsPassword)
     val bengt = ExternalStore.retrieve(bengtPassword)
 
-    mats.bubblesMap.values.size should be(1)
-    bengt.bubblesMap.values.size should be(1)
-    mats.bubblesMap.values.head.ipfsHash should be(bengt.bubblesMap.values.head.ipfsHash)
-    Crypto.secretKeysAreEqual(mats.bubblesMap.values.head.decryptSecretKey(mats.privateKey), bengt.bubblesMap.values.head.decryptSecretKey(bengt.privateKey))
+    mats.getAllBubbles.size should be(1)
+    bengt.getAllBubbles.size should be(1)
+    mats.getAllBubbles.head.ipfsHash should be(bengt.getAllBubbles.head.ipfsHash)
+    Crypto.secretKeysAreEqual(mats.getAllBubbles.head.decryptSecretKey(mats.privateKey), bengt.getAllBubbles.head.decryptSecretKey(bengt.privateKey))
   }
 
   def checkThatBothCanDecryptToTheSameBubble() = {
@@ -60,8 +60,8 @@ class ScenarioTest extends FlatSpec with Matchers {
 
   def getDecryptedBubbleFromIpfs(password: String) = {
     val user = ExternalStore.retrieve(password)
-    val bubbleEncryptionKey = user.bubblesMap.values.head.decryptSecretKey(user.privateKey)
-    IPFSProxy.receive(user.bubblesMap.values.head.ipfsHash, bubbleEncryptionKey)
+    val bubbleEncryptionKey = user.getAllBubbles.head.decryptSecretKey(user.privateKey)
+    IPFSProxy.receive(user.getAllBubbles.head.ipfsHash, bubbleEncryptionKey)
   }
 
   def preCreateUsers() = {
