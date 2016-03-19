@@ -5,10 +5,18 @@ import java.util.Date
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
+import org.json4s.NoTypeHints
+import org.json4s.native.Serialization
+import org.json4s.native.Serialization.write
+
 /**
   * Represents all data in a bubble.
   */
 case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: Long, members: Set[BubbleMember], bubbleType: String, encrypted: Boolean = true) extends Ordered[Bubble] {
+  implicit val formats = Serialization.formats(NoTypeHints)
+
+  private def allDataAsBytes: Array[Byte] = write(this).getBytes("UTF-8")
+
   def compare(that: Bubble) = {
     val milliDiff = this.startTime - that.startTime
     if (milliDiff < 0) -1
@@ -17,6 +25,7 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
   }
 
   def hasMember(friend: Friend) = members.exists(m => Crypto.encodedKeysAreEqual(m.encodedPublicKey, friend.encodedPublicKeyOfFriend))
+  def sha256AsBase64: String = Hash.sha256AsBase64(allDataAsBytes)
 }
 
 object Bubble {

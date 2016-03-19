@@ -4,12 +4,13 @@ import com.twitter.util.Await
 import org.scalatest.{FlatSpec, Matchers}
 
 class TierionTest extends FlatSpec with Matchers {
-  "TierionClient" can "talk to Tierion" in {
-    val future = TierionClient.getSubscription
+  "TierionClient" can "create a bubble record" in {
+    val mats = User("Mats Henricson")
+    val bubble = Bubble("Bubble name", mats, Set.empty)
+    val future = TierionClient.saveBubbleRecord(bubble.sha256AsBase64)
     Await.result(future.onSuccess {
       option => if (option.isDefined) {
-        println("Status code: " + option.get.id)
-        option.get.id should be("200")
+        option.get.id.length should be > 10
       }
     })
   }

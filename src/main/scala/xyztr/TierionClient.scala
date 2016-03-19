@@ -11,12 +11,12 @@ import org.json4s.native.Serialization._
 /**
   * Uses the Tierion REST API to save hashes of bubbles.
   */
-case class SubscriptionRequest(productIds: Long)
-
-case class SubscriptionResponse(id: String)
-
 object TierionClient {
   implicit val formats = Serialization.formats(NoTypeHints)
+
+  val tierionDatastoreId = 533
+  val tierionUsername = "mats@henricson.se"
+  val tierionApiKey = "gJHu+wHGIrqceQu+qUWETqmtB4k9ER5GwyZdC/lQ9vA="
 
   private val client = ClientBuilder()
       .name("tierion")
@@ -29,35 +29,26 @@ object TierionClient {
     val request = http.Request(method, "/")
     request.uri = uri
     request.host = "api.tierion.com"
-    request.headerMap.add("X-Username", "mats@henricson.se")
-    request.headerMap.add("X-Api-Key", "gJHu+wHGIrqceQu+qUWETqmtB4k9ER5GwyZdC/lQ9vA=")
+    request.headerMap.add("X-Username", tierionUsername)
+    request.headerMap.add("X-Api-Key", tierionApiKey)
     request.headerMap.add("Content-Type", "application/json")
 
     request
   }
 
-  def getSubscription: Future[Option[SubscriptionResponse]] = {
-    val request = createRequest(Method.Get, "/v1/datastores/533")
+  case class BubbleSha256(sha256: String, datastoreId: Int = tierionDatastoreId)
+  case class SaveBubbleRecordResponse(id: String, accountId: Int, datastoreId: Int, status: String, json: String, sha256: String, timestamp: Int)  // Ignoring "data"
 
-    client(request) map { response => response.status match {
-      case Status.Ok =>
-        println("Datastore data: " + response.encodeString())
-        Some(read[SubscriptionResponse]("{\"id\":\"" + response.getStatusCode() + "\"}"))
-      case _ =>
-        println("Something went wrong: " + response.toString())
-        None
-      }
-    }
-  }
-
-  def createRecord(productId: Long): Future[Unit] = {
-    val request = createRequest(http.Method.Put, "v1/records")
-    request.setContentString(write(SubscriptionRequest(productId)))
+  def saveBubbleRecord(sha256: String): Future[Option[SaveBubbleRecordResponse]] = {
+    val request = createRequest(http.Method.Post, s"/v1/records?datastoreId=$tierionDatastoreId")
+    request.setContentString(write(BubbleSha256(sha256)))
 
     client(request) map { response =>
       response.status match {
-        case Status.Ok | Status.NoContent => ()
-        case _ => throw new UnsupportedOperationException("xxxxxx")
+        case Status.Ok =>
+          Some(read[SaveBubbleRecordResponse](response.getContentString()))
+        case _ =>
+          None
       }
     }
   }

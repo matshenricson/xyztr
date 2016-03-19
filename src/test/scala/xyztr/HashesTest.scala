@@ -1,16 +1,12 @@
 package xyztr
 
-import java.security.MessageDigest
-
 import org.ipfs.api.Base58
 import org.scalatest.{FlatSpec, Matchers}
 
 class HashesTest extends FlatSpec with Matchers {
-  "MessageDigest" should "generate correct hashes" in {
-    val md = MessageDigest.getInstance("SHA-256")
+  "Hash" should "generate correct hashes" in {
     val hello = "Hello World!"
-    md.update(hello.getBytes("UTF-8"))
-    val digest = md.digest()
+    val digest = Hash.sha256(hello.getBytes("UTF-8"))
     digest.length should be(32)
     val formatted = String.format("%064x", new java.math.BigInteger(1, digest))
     formatted should be("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069")
