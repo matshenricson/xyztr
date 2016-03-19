@@ -57,6 +57,6 @@ class UserToUserChannelTest extends FlatSpec with Matchers {
     // Bengt gets the BubbleHandle and can decrypt the symmetric key
     val receivedBubbleHandle = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded).getOrElse(throw new IllegalStateException("What?"))
     val decryptedSymmetricKey = receivedBubbleHandle.decryptSecretKey(bengt.privateKey)
-    decryptedSymmetricKey.get.getAlgorithm should be("AES")
+    decryptedSymmetricKey.getAlgorithm should be("AES")
   }
 }

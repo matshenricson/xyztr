@@ -89,8 +89,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     newUser.bubbles.size should be(mats.bubbles.size)
     newUser.bubbles.size should be(1)
     newUser.bubbles.head.ipfsHash should be(mats.bubbles.head.ipfsHash)
-    Crypto.encodedKeysAreEqual(newUser.bubbles.head.encodedEncryptedEncryptionKey.get, mats.bubbles.head.encodedEncryptedEncryptionKey.get) should be(true)
-    newUser.bubbles.head.isBubbleEncrypted should be(mats.bubbles.head.isBubbleEncrypted)
+    Crypto.encodedKeysAreEqual(newUser.bubbles.head.encodedEncryptedEncryptionKey, mats.bubbles.head.encodedEncryptedEncryptionKey) should be(true)
   }
 
   "User" can "be recreated from a password" in {
@@ -118,7 +117,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     Crypto.publicKeysAreEqual(recreatedMats.publicKey, mats.publicKey) should be(true)
     recreatedMats.bubbles.size should be(1)
     recreatedMats.bubbles.head.ipfsHash should be(ipfsHash)
-    Crypto.encodedKeysAreEqual(recreatedMats.bubbles.head.encodedEncryptedEncryptionKey.get, mats.bubbles.head.encodedEncryptedEncryptionKey.get) should be(true)
+    Crypto.encodedKeysAreEqual(recreatedMats.bubbles.head.encodedEncryptedEncryptionKey, mats.bubbles.head.encodedEncryptedEncryptionKey) should be(true)
     recreatedMats.friends.size should be(1)
     Crypto.encodedKeysAreEqual(recreatedMats.friends.head.encodedPublicKeyOfFriend, bengt.publicKey.getEncoded) should be(true)
     recreatedMats.friends.head.friendName should be(bengt.name)

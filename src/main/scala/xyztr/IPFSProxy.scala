@@ -41,31 +41,4 @@ object IPFSProxy {
     val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
     JSON.fromJsonString[Bubble](bubbleJSONString)
   }
-
-  /**
-    * Sends a plaintext bubble to IPFS
-    *
-    * @param bubble the bubble to be encrypted and sent to IPFS
-    * @return the IPFS content Base58 content hash of the bubble sent to IPFS
-    */
-  def send(bubble: Bubble): String = {
-    val bubbleJSONString = JSON.toJsonString(bubble)
-    val bubbleJSONBytes = bubbleJSONString.getBytes(CharsetUtil.UTF_8)
-    val data = new NamedStreamable.ByteArrayWrapper(bubbleJSONBytes)
-    val merkleNode = ipfs.add(data)
-    merkleNode.hash.toBase58
-  }
-
-  /**
-    * Gets a plaintext Bubble from IPFS
-    *
-    * @param ipfsHash the IPFS Base58 hash of the plaintext Bubble we wish to get from IPFS
-    * @return the Bubble object
-    */
-  def receive(ipfsHash: String): Bubble = {
-    val hash = Multihash.fromBase58(ipfsHash)
-    val bubbleJSONBytes = ipfs.cat(hash)
-    val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
-    JSON.fromJsonString[Bubble](bubbleJSONString)
-  }
 }
