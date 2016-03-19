@@ -9,9 +9,9 @@ import com.twitter.util.Future
   * Uses the Tierion REST API to save hashes of bubbles.
   */
 object TierionClient {
-  val tierionDatastoreId = 533
-  val tierionUsername = "mats@henricson.se"
-  val tierionApiKey = "gJHu+wHGIrqceQu+qUWETqmtB4k9ER5GwyZdC/lQ9vA="
+  private val tierionDatastoreId = 533
+  private val tierionUsername = "mats@henricson.se"
+  private val tierionApiKey = "gJHu+wHGIrqceQu+qUWETqmtB4k9ER5GwyZdC/lQ9vA="
 
   private val client = ClientBuilder()
       .name("tierion")
@@ -20,7 +20,7 @@ object TierionClient {
       .codec(com.twitter.finagle.http.Http())
       .hostConnectionLimit(1).build()
 
-  def createRequest(method: Method, uri: String) = {
+  private def createRequest(method: Method, uri: String) = {
     val request = http.Request(method, "/")
     request.uri = uri
     request.host = "api.tierion.com"
@@ -31,7 +31,7 @@ object TierionClient {
     request
   }
 
-  case class BubbleSha256(sha256: String, datastoreId: Int = tierionDatastoreId)
+  private case class BubbleSha256(sha256: String, datastoreId: Int = tierionDatastoreId)
   case class SaveBubbleRecordResponse(id: String, accountId: Int, datastoreId: Int, status: String, json: String, sha256: String, timestamp: Int)  // Ignoring "data"
 
   def saveBubbleRecord(sha256: String): Future[Option[SaveBubbleRecordResponse]] = {

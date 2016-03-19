@@ -1,5 +1,6 @@
 package xyztr
 
+import com.twitter.util.Await
 import org.scalatest.{FlatSpec, Matchers}
 
 class UserTest extends FlatSpec with Matchers {
@@ -40,7 +41,8 @@ class UserTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
+    val response = TierionClient.saveBubbleRecord(bubble.sha256AsBase64)
+    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey, Await.result(response)))   // TODO: Timeout ???
 
     val decryptedBubbleEncryptionKey = handles.head.decryptSecretKey(bengt.privateKey)
     decryptedBubbleEncryptionKey.getEncoded should be(bubbleEncryptionKey.getEncoded)
@@ -56,7 +58,8 @@ class UserTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey))
+    val response = TierionClient.saveBubbleRecord(bubble.sha256AsBase64)
+    val handles = mats.friends.map(f => BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey, Await.result(response)))   // TODO: Timeout ???
 
     val decryptedBubbleEncryptionKey = handles.head.decryptSecretKey(bengt.privateKey)
 

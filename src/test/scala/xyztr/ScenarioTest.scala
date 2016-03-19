@@ -1,5 +1,6 @@
 package xyztr
 
+import com.twitter.util.Await
 import org.scalatest.{FlatSpec, Matchers}
 
 class ScenarioTest extends FlatSpec with Matchers {
@@ -114,9 +115,10 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
+    val response = TierionClient.saveBubbleRecord(bubble.sha256AsBase64)
 
     for (f <- mats.friends) {
-      val handle = BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey)
+      val handle = BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey, Await.result(response))   // TODO: Timeout ???e
       UserToUserChannel.sendBubbleHandle(f.encodedPublicKeyOfFriend, handle)
     }
 

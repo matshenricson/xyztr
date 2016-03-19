@@ -7,7 +7,7 @@ import java.security.{PrivateKey, PublicKey}
   */
 class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKey) {
   val friends = new scala.collection.mutable.HashSet[Friend]()
-  val bubbles = new scala.collection.mutable.HashSet[BubbleHandle]()
+  val bubbles = new scala.collection.mutable.HashSet[BubbleHandle]()    // TODO: Change to HashMap
 
   def acceptFriendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.nameOfSender, fr.publicKeyOfSender))

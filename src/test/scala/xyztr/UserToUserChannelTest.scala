@@ -51,7 +51,7 @@ class UserToUserChannelTest extends FlatSpec with Matchers {
 
     // Mats sends a BubbleHandle to Bengt
     val friend = mats.friends.head
-    val sentBubbleHandle = BubbleHandle("SomeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), friend.publicKey)
+    val sentBubbleHandle = BubbleHandle("SomeIpfsHash", Crypto.createNewSymmetricEncryptionKey(), friend.publicKey, None)
     UserToUserChannel.sendBubbleHandle(friend.encodedPublicKeyOfFriend, sentBubbleHandle)
 
     // Bengt gets the BubbleHandle and can decrypt the symmetric key
