@@ -18,6 +18,6 @@ object CoreUserData {
       user.friends.toSet,
       user.publicKey.getEncoded,
       Crypto.createPrivateKeyBigIntegerComponentsAsStrings(user.privateKey),
-      user.bubbles.toSet)
+      user.bubblesMap.values.toSet)
   }
 }

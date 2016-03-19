@@ -37,10 +37,10 @@ class ScenarioTest extends FlatSpec with Matchers {
     val mats = ExternalStore.retrieve(matsPassword)
     val bengt = ExternalStore.retrieve(bengtPassword)
 
-    mats.bubbles.size should be(1)
-    bengt.bubbles.size should be(1)
-    mats.bubbles.head.ipfsHash should be(bengt.bubbles.head.ipfsHash)
-    Crypto.secretKeysAreEqual(mats.bubbles.head.decryptSecretKey(mats.privateKey), bengt.bubbles.head.decryptSecretKey(bengt.privateKey))
+    mats.bubblesMap.values.size should be(1)
+    bengt.bubblesMap.values.size should be(1)
+    mats.bubblesMap.values.head.ipfsHash should be(bengt.bubblesMap.values.head.ipfsHash)
+    Crypto.secretKeysAreEqual(mats.bubblesMap.values.head.decryptSecretKey(mats.privateKey), bengt.bubblesMap.values.head.decryptSecretKey(bengt.privateKey))
   }
 
   def checkThatBothCanDecryptToTheSameBubble() = {
@@ -60,8 +60,8 @@ class ScenarioTest extends FlatSpec with Matchers {
 
   def getDecryptedBubbleFromIpfs(password: String) = {
     val user = ExternalStore.retrieve(password)
-    val bubbleEncryptionKey = user.bubbles.head.decryptSecretKey(user.privateKey)
-    IPFSProxy.receive(user.bubbles.head.ipfsHash, bubbleEncryptionKey)
+    val bubbleEncryptionKey = user.bubblesMap.values.head.decryptSecretKey(user.privateKey)
+    IPFSProxy.receive(user.bubblesMap.values.head.ipfsHash, bubbleEncryptionKey)
   }
 
   def preCreateUsers() = {
@@ -104,7 +104,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bengt = ExternalStore.retrieve(bengtPassword)
 
     val handles = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded)
-    handles.map(h => bengt.bubbles.add(h))
+    handles.map(h => bengt.addBubble(h))
 
     ExternalStore.save(bengt, bengtPassword)
   }
@@ -122,7 +122,7 @@ class ScenarioTest extends FlatSpec with Matchers {
       UserToUserChannel.sendBubbleHandle(f.encodedPublicKeyOfFriend, handle)
     }
 
-    mats.bubbles.add(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
+    mats.addBubble(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
 
     ExternalStore.save(mats, matsPassword)
   }
