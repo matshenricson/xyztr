@@ -4,17 +4,12 @@ import javax.crypto.SecretKey
 
 import org.ipfs.api.{IPFS, Multihash, NamedStreamable}
 import org.jboss.netty.util.CharsetUtil
-import org.json4s.NoTypeHints
-import org.json4s.native.Serialization
-import org.json4s.native.Serialization.{read, write, writePretty}
 
 /**
   * Proxy to IPFS
   */
 object IPFSProxy {
   val ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001")
-
-  implicit val formats = Serialization.formats(NoTypeHints)
 
   /**
     * Encrypts a bubble and sends it to IPFS
@@ -24,7 +19,7 @@ object IPFSProxy {
     * @return the IPFS content Base58 content hash of the encrypted bubble sent to IPFS
     */
   def send(bubble: Bubble, bubbleEncryptionKey: SecretKey): String = {
-    val bubbleJSONString = write(bubble)
+    val bubbleJSONString = JSON.toJsonString(bubble)
     val bubbleJSONBytes = bubbleJSONString.getBytes(CharsetUtil.UTF_8)
     val encryptedBubbleJSONBytes = Crypto.encryptWithSymmetricKey(bubbleJSONBytes, bubbleEncryptionKey)
     val data = new NamedStreamable.ByteArrayWrapper(encryptedBubbleJSONBytes)
@@ -44,7 +39,7 @@ object IPFSProxy {
     val encryptedBubbleJSONBytes = ipfs.cat(hash)
     val bubbleJSONBytes = Crypto.decryptWithSymmetricKey(encryptedBubbleJSONBytes, bubbleDecryptionKey)
     val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
-    read[Bubble](bubbleJSONString)
+    JSON.fromJsonString[Bubble](bubbleJSONString)
   }
 
   /**
@@ -54,7 +49,7 @@ object IPFSProxy {
     * @return the IPFS content Base58 content hash of the bubble sent to IPFS
     */
   def send(bubble: Bubble): String = {
-    val bubbleJSONString = writePretty(bubble)
+    val bubbleJSONString = JSON.toJsonString(bubble)
     val bubbleJSONBytes = bubbleJSONString.getBytes(CharsetUtil.UTF_8)
     val data = new NamedStreamable.ByteArrayWrapper(bubbleJSONBytes)
     val merkleNode = ipfs.add(data)
@@ -71,6 +66,6 @@ object IPFSProxy {
     val hash = Multihash.fromBase58(ipfsHash)
     val bubbleJSONBytes = ipfs.cat(hash)
     val bubbleJSONString = new String(bubbleJSONBytes, CharsetUtil.UTF_8)
-    read[Bubble](bubbleJSONString)
+    JSON.fromJsonString[Bubble](bubbleJSONString)
   }
 }

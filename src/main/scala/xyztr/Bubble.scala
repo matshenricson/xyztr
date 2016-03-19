@@ -6,17 +6,12 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 import org.jboss.netty.util.CharsetUtil
-import org.json4s.NoTypeHints
-import org.json4s.native.Serialization
-import org.json4s.native.Serialization.write
 
 /**
   * Represents all data in a bubble.
   */
 case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: Long, members: Set[BubbleMember], bubbleType: String, encrypted: Boolean = true) extends Ordered[Bubble] {
-  implicit val formats = Serialization.formats(NoTypeHints)
-
-  private def allDataAsBytes: Array[Byte] = write(this).getBytes(CharsetUtil.UTF_8)
+  private def allDataAsBytes: Array[Byte] = JSON.toJsonString(this).getBytes(CharsetUtil.UTF_8)
 
   def compare(that: Bubble) = {
     val milliDiff = this.startTime - that.startTime

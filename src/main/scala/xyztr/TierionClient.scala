@@ -4,16 +4,11 @@ import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.http
 import com.twitter.finagle.http._
 import com.twitter.util.Future
-import org.json4s.NoTypeHints
-import org.json4s.native.Serialization
-import org.json4s.native.Serialization._
 
 /**
   * Uses the Tierion REST API to save hashes of bubbles.
   */
 object TierionClient {
-  implicit val formats = Serialization.formats(NoTypeHints)
-
   val tierionDatastoreId = 533
   val tierionUsername = "mats@henricson.se"
   val tierionApiKey = "gJHu+wHGIrqceQu+qUWETqmtB4k9ER5GwyZdC/lQ9vA="
@@ -41,12 +36,12 @@ object TierionClient {
 
   def saveBubbleRecord(sha256: String): Future[Option[SaveBubbleRecordResponse]] = {
     val request = createRequest(http.Method.Post, s"/v1/records?datastoreId=$tierionDatastoreId")
-    request.setContentString(write(BubbleSha256(sha256)))
+    request.setContentString(JSON.toJsonString(BubbleSha256(sha256)))
 
     client(request) map { response =>
       response.status match {
         case Status.Ok =>
-          Some(read[SaveBubbleRecordResponse](response.getContentString()))
+          Some(JSON.fromJsonString[SaveBubbleRecordResponse](response.getContentString()))
         case _ =>
           None
       }

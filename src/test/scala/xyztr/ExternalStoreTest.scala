@@ -2,14 +2,9 @@ package xyztr
 
 import java.math.BigInteger
 
-import org.json4s.NoTypeHints
-import org.json4s.native.Serialization
-import org.json4s.native.Serialization._
 import org.scalatest.{FlatSpec, Matchers}
 
 class ExternalStoreTest extends FlatSpec with Matchers {
-  implicit val formats = Serialization.formats(NoTypeHints)
-
   "CoreUserData" can "be created in a natural way" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
@@ -45,8 +40,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.bubbles.add(BubbleHandle("ipfsHash", bubbleEncryptionKey, mats.publicKey))
     val coreUserData = CoreUserData(mats)
 
-    val json = write(coreUserData)
-    val newCoreUserData = read[CoreUserData](json)
+    val json = JSON.toJsonString(coreUserData)
+    val newCoreUserData = JSON.fromJsonString[CoreUserData](json)
 
     coreUserData.privateKeyBigIntegerComponentsAsStrings should be(newCoreUserData.privateKeyBigIntegerComponentsAsStrings)
     coreUserData.encodedPublicKey should be(newCoreUserData.encodedPublicKey)

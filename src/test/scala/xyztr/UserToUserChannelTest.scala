@@ -1,12 +1,8 @@
 package xyztr
 
-import org.json4s.NoTypeHints
-import org.json4s.native.Serialization
 import org.scalatest.{FlatSpec, Matchers}
 
 class UserToUserChannelTest extends FlatSpec with Matchers {
-  implicit val formats = Serialization.formats(NoTypeHints)
-
   "FriendRequest" can "be sent to someone" in {
     val mats = User("Mats Henricson")
 
