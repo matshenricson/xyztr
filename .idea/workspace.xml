@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/FutureTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/FutureTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/TierionTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/TierionTest.scala" />
     </list>
     <ignored path="xyztr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TierionClient.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TierionClient.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.8389982">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="e#15#63#0" expanded="true" />
               </folding>
@@ -65,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TierionTest.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TierionTest.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/TierionTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29516995">
-              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -94,9 +91,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding>
-                <element signature="e#15#36#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,7 +100,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -116,9 +111,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding>
-                <element signature="e#15#44#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -179,8 +172,8 @@
         <option value="$PROJECT_DIR$/build.sbt" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/FutureTest.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/TierionTest.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala" />
       </list>
     </option>
   </component>
@@ -961,44 +954,44 @@
       <workItem from="1457891533910" duration="8659000" />
       <workItem from="1457901205769" duration="45324000" />
       <workItem from="1458055072377" duration="73797000" />
-      <workItem from="1458380613510" duration="7720000" />
+      <workItem from="1458380613510" duration="11849000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TierionTest - 2016.03.19 at 12h 35m 56s.xml">
+    <history-entry file="ScalaTests_in__scala_ - 2016.03.19 at 14h 54m 00s.xml">
+      <configuration name="ScalaTests in 'scala'" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TierionTest - 2016.03.19 at 14h 00m 47s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 12h 37m 28s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 16m 20s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 12h 38m 26s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 30m 13s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 12h 38m 40s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 33m 50s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 12h 38m 57s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 34m 06s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 12h 39m 23s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 34m 49s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 13h 08m 42s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 47m 25s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 13h 09m 48s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 48m 13s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 13h 09m 58s.xml">
-      <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TierionTest - 2016.03.19 at 13h 11m 10s.xml">
+    <history-entry file="TierionTest - 2016.03.19 at 14h 54m 42s.xml">
       <configuration name="TierionTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162089000" />
+    <option name="totallyTimeSpent" value="166218000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1920" height="1084" extended-state="6" />
@@ -1016,6 +1009,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1025,7 +1019,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1257,7 +1250,7 @@
         <state vertical-scroll-proportion="0.8389982">
           <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
           <folding>
-            <element signature="e#15#42#0" expanded="true" />
+            <element signature="e#15#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1323,7 +1316,7 @@
         <state vertical-scroll-proportion="-0.10017889">
           <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
           <folding>
-            <element signature="e#15#44#0" expanded="true" />
+            <element signature="e#15#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1333,7 +1326,7 @@
         <state vertical-scroll-proportion="1.2075135">
           <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
           <folding>
-            <element signature="e#15#59#0" expanded="true" />
+            <element signature="e#15#59#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1373,7 +1366,7 @@
         <state vertical-scroll-proportion="0.56350625">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#15#46#0" expanded="true" />
+            <element signature="e#15#46#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1390,7 +1383,7 @@
         <state vertical-scroll-proportion="-1.4150268">
           <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
           <folding>
-            <element signature="e#15#42#0" expanded="true" />
+            <element signature="e#15#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1407,16 +1400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1425,9 +1408,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#44#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1441,22 +1422,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-          <folding>
-            <element signature="e#15#63#0" expanded="true" />
-          </folding>
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/TierionTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29516995">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="e#15#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/TierionClient.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8389982">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
