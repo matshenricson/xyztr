@@ -5,22 +5,22 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class FutureTest extends FlatSpec with Matchers {
   "Futures of Some" can "be handled in one way or the other" in {
-    val f1 = Future(Some(77))
+    val f1 = Future(Some(66))
     Await.result(f1.onSuccess {
-      option => if (option.isDefined) option.get should be(77)
+      option => if (option.isDefined) option.get should be(66)
     })
 
-    val f2 = Future(Some(88))
+    val f2 = Future(Some(77))
     Await.result(f2.onSuccess {option =>
       for {
         i <- option
-      } yield i should be(88)
+      } yield i should be(77)
     })
 
-    Future(Some(99)) map { option =>
+    Future(Some(88)) map { option =>
       for {
         i <- option
-      } yield i should be(99)
+      } yield i should be(88)
     }
   }
 
