@@ -5,7 +5,8 @@ import java.util.Date
 /**
   * Represents all data in a bubble.
   */
-case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: Long, members: Set[BubbleMember], bubbleType: String) extends Ordered[Bubble] {
+case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: Long, members: Set[BubbleMember], bubbleType: String,
+                  audio: Set[AudioData] = Set()) extends Ordered[Bubble] {
   def compare(that: Bubble) = {
     val milliDiff = this.startTime - that.startTime
     if (milliDiff < 0) -1

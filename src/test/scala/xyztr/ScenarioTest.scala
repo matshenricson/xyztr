@@ -1,6 +1,6 @@
 package xyztr
 
-import java.util.Base64
+import java.nio.file.{Files, Paths}
 
 import com.twitter.util.Await
 import org.scalatest.{FlatSpec, Matchers}
@@ -25,6 +25,9 @@ class ScenarioTest extends FlatSpec with Matchers {
     bengtGetsBubble_ChangesIt_SavesToIpfs_SendsBubbleHandleToMats()
     matsGetsBubbleHandle()
     matsGetsBubble_CanSeeThatItIsChanged()
+    matsGetsBubble_AddsSoundFile_SavesToIpfs_SendsBubbleHandleToBengt()
+    bengtGetsBubbleHandle()
+    bengtGetsBubble_CanSeeThatItNowHasImage()
   }
 
   def checkThatMatsAndBengtAreMutualFriends() = {
@@ -110,9 +113,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bengt = ExternalStore.retrieve(bengtPassword)
 
     val handles = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded)
-    println("Bengt will get this key: " + Base64.getEncoder.encodeToString(handles.head.decryptSecretKey(bengt.privateKey).getEncoded))
     handles.map(bh => bengt.addBubbleHandle(bh))
-    println("Bengt should get this key: " + Base64.getEncoder.encodeToString(bengt.getAllBubbleHandles.head.decryptSecretKey(bengt.privateKey).getEncoded))
 
     ExternalStore.save(bengt, bengtPassword)
   }
@@ -130,7 +131,6 @@ class ScenarioTest extends FlatSpec with Matchers {
       UserToUserChannel.sendBubbleHandle(f.encodedPublicKeyOfFriend, handle)
     }
 
-    println("Mats sent this key: " + Base64.getEncoder.encodeToString(bubbleEncryptionKey.getEncoded))
     mats.addBubbleHandle(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey, awaitedTierionResponse))
 
     ExternalStore.save(mats, matsPassword)
@@ -180,5 +180,51 @@ class ScenarioTest extends FlatSpec with Matchers {
     newBubble.name should be("Changed " + bubbleName)
 
     ExternalStore.save(mats, matsPassword)
+  }
+
+  def getAudioData(bubble: Bubble): Set[AudioData] = {
+    val fileName = "src/test/resources/pin_dropping.mp3"
+    val path = Paths.get(fileName)
+    val audioBytes = Files.readAllBytes(path)
+
+    bubble.audio ++ Set(AudioData(fileName, audioBytes))
+  }
+
+  def matsGetsBubble_AddsSoundFile_SavesToIpfs_SendsBubbleHandleToBengt() = {
+    val mats = ExternalStore.retrieve(matsPassword)
+
+    val oldHandle = mats.getAllBubbleHandles.toSet.head
+    val bubbleEncryptionKey = oldHandle.decryptSecretKey(mats.privateKey)
+    val oldBubble = IPFSProxy.receive(oldHandle.ipfsHash, bubbleEncryptionKey)
+    val newAudioData = getAudioData(oldBubble)
+    val newBubble = oldBubble.copy(audio = newAudioData)
+    val newIpfsHash = IPFSProxy.send(newBubble, bubbleEncryptionKey)
+    val awaitedTierionResponse = Await.result(TierionClient.saveBubbleRecord(newIpfsHash))   // TODO: Timeout ???
+
+    for (f <- mats.friends) {
+      val handle = BubbleHandle(newIpfsHash, bubbleEncryptionKey, f.publicKey, awaitedTierionResponse)
+      UserToUserChannel.sendBubbleHandle(f.encodedPublicKeyOfFriend, handle)
+    }
+
+    mats.addBubbleHandle(BubbleHandle(newIpfsHash, bubbleEncryptionKey, mats.publicKey, awaitedTierionResponse))
+
+    ExternalStore.save(mats, matsPassword)
+  }
+
+  def bengtGetsBubble_CanSeeThatItNowHasImage() = {
+    val bengt = ExternalStore.retrieve(bengtPassword)
+
+    bengt.getAllBubbleHandles.toSet.size should be(3)
+    bengt.realNumberOfUniqueBubbles should be(1)
+
+    val aHandle = bengt.getAllBubbleHandles.toSet.head
+    val latestHandle = bengt.getLatestBubbleHandle(aHandle)
+    val bubbleEncryptionKey = latestHandle.decryptSecretKey(bengt.privateKey)
+    val newBubble = IPFSProxy.receive(latestHandle.ipfsHash, bubbleEncryptionKey)
+
+    newBubble.audio.size should be(1)
+    newBubble.audio.head.data.length should be > 10000
+
+    ExternalStore.save(bengt, bengtPassword)
   }
 }
