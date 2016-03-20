@@ -20,6 +20,11 @@ class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKe
 
   def getLatestBubbleHandle(bh: BubbleHandle) = (mutable.TreeSet[BubbleHandle]() ++ bubbleHandleMap.get(bubbleHandleMapKey(bh)).get.toSet).head // TODO: Make more robust
 
+  def bubblesInChronologicalOrder: List[BubbleHandle] = {
+    val latestBubbles = bubbleHandleMap.keySet.map(key => (mutable.TreeSet[BubbleHandle]() ++ bubbleHandleMap.get(key).get.toSet).head)
+    (mutable.TreeSet[BubbleHandle]() ++ latestBubbles).toList
+  }
+
   def realNumberOfUniqueBubbles = bubbleHandleMap.keySet.size  // TODO: For debugging, remove later
 
   def acceptFriendRequest(fr: FriendRequest): FriendResponse = {

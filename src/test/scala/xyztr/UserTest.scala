@@ -77,7 +77,7 @@ class UserTest extends FlatSpec with Matchers {
     fetchedBubbleFromIpfs.members.tail.head.encodedPublicKey should be(bubble.members.tail.head.encodedPublicKey)
   }
 
-  "MultiMap" can "be understood..." in {
+  "BubbleHandle" can "be sorted" in {
     val mats = User("Mats")
 
     val b1 = Bubble("Bubble 1", mats, mats.friends.toSet)
@@ -104,5 +104,32 @@ class UserTest extends FlatSpec with Matchers {
     val latestBubbleHandle = mats.getLatestBubbleHandle(b1Handle)
     latestBubbleHandle.ipfsHash should be(b1PrimeHandle.ipfsHash)
     latestBubbleHandle.created should be(b1PrimeHandle.created)
+  }
+
+  "BubbleHandle" can "be chronologically fetched from user" in {
+    val mats = User("Mats")
+
+    val b1 = Bubble("Bubble 1", mats, mats.friends.toSet)
+    val b1Key = Crypto.createNewSymmetricEncryptionKey()
+
+    val b2 = Bubble("Bubble 2", mats, mats.friends.toSet)
+    val b2Key = Crypto.createNewSymmetricEncryptionKey()
+
+    val b1Handle = BubbleHandle("ipfsHash1", b1Key, mats.publicKey)
+    val b2Handle = BubbleHandle("ipfsHash2", b2Key, mats.publicKey)
+    mats.addBubbleHandle(b1Handle)
+    mats.addBubbleHandle(b2Handle)
+
+    // Create a new Bubble Handle, which is a new version of b1Handle
+    val b1PrimeHandle = BubbleHandle("ipfsHash1Prime", b1Key, mats.publicKey)
+    mats.addBubbleHandle(b1PrimeHandle)
+
+    mats.getAllBubbleHandles.size should be(3)
+
+    val bubbleList = mats.bubblesInChronologicalOrder
+
+    bubbleList.size should be(2)
+    bubbleList.head.ipfsHash should be("ipfsHash1Prime")   // Newest bubble
+    bubbleList.tail.head.ipfsHash should be("ipfsHash2")   // Oldest bubble
   }
 }
