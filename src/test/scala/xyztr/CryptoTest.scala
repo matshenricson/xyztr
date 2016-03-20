@@ -23,4 +23,15 @@ class CryptoTest extends FlatSpec with Matchers {
 
     Crypto.secretKeysAreEqual(key1, key2) shouldBe true
   }
+
+  "Crypto" can "encrypt with public key and decrypt with private key" in {
+    val keyPair = Crypto.createPrivatePublicPair()
+    val key1 = Crypto.createNewSymmetricEncryptionKey()
+    val encryptedKey1 = Crypto.encryptWithPublicKey(key1.getEncoded, keyPair.getPublic)
+    val key2 = Crypto.decryptSymmetricKeyWithPrivateKey(encryptedKey1, keyPair.getPrivate)
+    Crypto.secretKeysAreEqual(key1, key2) shouldBe true
+
+    val key3Bytes = Crypto.decryptWithPrivateKey(encryptedKey1, keyPair.getPrivate)
+    Crypto.encodedKeysAreEqual(key1.getEncoded, key3Bytes)
+  }
 }
