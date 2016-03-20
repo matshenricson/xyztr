@@ -11,16 +11,11 @@ class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKe
   val friends = new scala.collection.mutable.HashSet[Friend]()                                  // TODO: Make private ???
   private val bubbleHandleMap = new mutable.HashMap[Array[Byte], mutable.Set[BubbleHandle]] with mutable.MultiMap[Array[Byte], BubbleHandle]
 
-  def getAllBubbleHandles = {
-    // TODO: There MUST be a smarter way of doing this...
-    val bhSet = new mutable.HashSet[BubbleHandle]
-    for (bubblesSet <- bubbleHandleMap.values) {
-      bubblesSet.map(bh => bhSet.add(bh))
-    }
-    bhSet
-  }
+  def getAllBubbleHandles = bubbleHandleMap.values.flatten
 
   def addBubbleHandle(bubbleHandle: BubbleHandle) = bubbleHandleMap.addBinding(bubbleHandle.encodedEncryptedEncryptionKey, bubbleHandle)
+
+  def getLatestBubbleHandle(bubbleKey: Array[Byte]) = (mutable.TreeSet[BubbleHandle]() ++ bubbleHandleMap.get(bubbleKey).get.toSet).head  // TODO: Make more robust
 
   def acceptFriendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.nameOfSender, fr.publicKeyOfSender))

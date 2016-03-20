@@ -54,6 +54,7 @@ object Crypto {
     new SecretKeySpec(tmp.getEncoded, "AES")
   }
 
+  // TODO: Warning: This is NOT idempotent, returns a new value each time!!!!
   def encryptWithPublicKey(plainTextBytes: Array[Byte], publicKey: PublicKey): Array[Byte] = {
     val cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding")     // TODO: Is that the correct cipher for DSA public key?
     cipher.init(Cipher.ENCRYPT_MODE, publicKey)
