@@ -34,4 +34,19 @@ class CryptoTest extends FlatSpec with Matchers {
     val key3Bytes = Crypto.decryptWithPrivateKey(encryptedKey1, keyPair.getPrivate)
     Crypto.encodedKeysAreEqual(key1.getEncoded, key3Bytes)
   }
+
+  "Crypto" can "give different results two times in a row for encrypting with public key" in {
+    val keyPair = Crypto.createPrivatePublicPair()
+    val encodedKey1 = Crypto.createNewSymmetricEncryptionKey().getEncoded
+    val encryptedKey1 = Crypto.encryptWithPublicKey(encodedKey1, keyPair.getPublic)
+    val encryptedKey2 = Crypto.encryptWithPublicKey(encodedKey1, keyPair.getPublic)
+
+    encryptedKey1.toSeq should not be encryptedKey2.toSeq
+
+    // But if we decrypt them, then they will be equal again
+    val decryptedKey1 = Crypto.decryptSymmetricKeyWithPrivateKey(encryptedKey1, keyPair.getPrivate)
+    val decryptedKey2 = Crypto.decryptSymmetricKeyWithPrivateKey(encryptedKey2, keyPair.getPrivate)
+
+    Crypto.secretKeysAreEqual(decryptedKey1, decryptedKey2)
+  }
 }

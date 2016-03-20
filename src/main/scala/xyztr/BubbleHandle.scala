@@ -22,16 +22,8 @@ case class BubbleHandle(ipfsHash: String, encodedEncryptedEncryptionKey: Array[B
 }
 
 object BubbleHandle {
-  def apply(ipfsHash: String, secretKey: SecretKey, publicKey: PublicKey): BubbleHandle =
-    BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey), new Date().getTime, None)
-
-  def apply(ipfsHash: String, secretKey: SecretKey, publicKey: PublicKey, response: Option[SaveBubbleRecordResponse]): BubbleHandle = response.isDefined match {
+  def apply(ipfsHash: String, secretKey: SecretKey, publicKey: PublicKey, response: Option[SaveBubbleRecordResponse] = None): BubbleHandle = response.isDefined match {
     case false => BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey), new Date().getTime, None)
     case true  => BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(secretKey.getEncoded, publicKey), response.get.timestamp, Some(response.get.id))
-  }
-
-  def apply(newIpfsHash: String, oldHandle: BubbleHandle, response: Option[SaveBubbleRecordResponse]): BubbleHandle = response.isDefined match {
-    case false => BubbleHandle(newIpfsHash, oldHandle.encodedEncryptedEncryptionKey, new Date().getTime, None)
-    case true  => BubbleHandle(newIpfsHash, oldHandle.encodedEncryptedEncryptionKey, response.get.timestamp, Some(response.get.id))
   }
 }

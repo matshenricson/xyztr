@@ -1,6 +1,7 @@
 package xyztr
 
 import java.security.{PrivateKey, PublicKey}
+import java.util.Base64
 
 import scala.collection.mutable
 
@@ -9,13 +10,17 @@ import scala.collection.mutable
   */
 class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKey) {
   val friends = new scala.collection.mutable.HashSet[Friend]()                                  // TODO: Make private ???
-  private val bubbleHandleMap = new mutable.HashMap[Array[Byte], mutable.Set[BubbleHandle]] with mutable.MultiMap[Array[Byte], BubbleHandle]
+  private val bubbleHandleMap = new mutable.HashMap[String, mutable.Set[BubbleHandle]] with mutable.MultiMap[String, BubbleHandle]
 
   def getAllBubbleHandles = bubbleHandleMap.values.flatten
 
-  def addBubbleHandle(bubbleHandle: BubbleHandle) = bubbleHandleMap.addBinding(bubbleHandle.encodedEncryptedEncryptionKey, bubbleHandle)
+  private def bubbleHandleMapKey(bh: BubbleHandle) = Base64.getEncoder.encodeToString(bh.decryptSecretKey(privateKey).getEncoded)
 
-  def getLatestBubbleHandle(bubbleKey: Array[Byte]) = (mutable.TreeSet[BubbleHandle]() ++ bubbleHandleMap.get(bubbleKey).get.toSet).head  // TODO: Make more robust
+  def addBubbleHandle(bh: BubbleHandle) = bubbleHandleMap.addBinding(bubbleHandleMapKey(bh), bh)
+
+  def getLatestBubbleHandle(bh: BubbleHandle) = (mutable.TreeSet[BubbleHandle]() ++ bubbleHandleMap.get(bubbleHandleMapKey(bh)).get.toSet).head // TODO: Make more robust
+
+  def realNumberOfUniqueBubbles = bubbleHandleMap.keySet.size  // TODO: For debugging, remove later
 
   def acceptFriendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.nameOfSender, fr.publicKeyOfSender))
