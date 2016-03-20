@@ -40,10 +40,8 @@ object TierionClient {
 
     client(request) map { response =>
       response.status match {
-        case Status.Ok =>
-          Some(JSON.fromJsonString[SaveBubbleRecordResponse](response.getContentString()))
-        case _ =>
-          None
+        case Status.Ok => Some(JSON.fromJsonString[SaveBubbleRecordResponse](response.getContentString()))
+        case _ => None
       }
     }
   }
