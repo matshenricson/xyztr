@@ -2,14 +2,10 @@ package xyztr
 
 import java.util.Date
 
-import org.jboss.netty.util.CharsetUtil
-
 /**
   * Represents all data in a bubble.
   */
 case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: Long, members: Set[BubbleMember], bubbleType: String) extends Ordered[Bubble] {
-  private def allDataAsBytes: Array[Byte] = JSON.toJsonString(this).getBytes(CharsetUtil.UTF_8)
-
   def compare(that: Bubble) = {
     val milliDiff = this.startTime - that.startTime
     if (milliDiff < 0) -1
@@ -18,7 +14,6 @@ case class Bubble(name: String, creatorName: String, startTime: Long, stopTime: 
   }
 
   def hasMember(friend: Friend) = members.exists(m => Crypto.encodedKeysAreEqual(m.encodedPublicKey, friend.encodedPublicKeyOfFriend))
-  def sha256AsBase64: String = Hash.sha256AsBase64(allDataAsBytes)
 }
 
 object Bubble {

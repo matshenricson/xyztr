@@ -115,7 +115,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    val response = TierionClient.saveBubbleRecord(bubble.sha256AsBase64)
+    val response = TierionClient.saveBubbleRecord(ipfsHash)
 
     for (f <- mats.friends) {
       val handle = BubbleHandle(ipfsHash, bubbleEncryptionKey, f.publicKey, Await.result(response))   // TODO: Timeout ???e
