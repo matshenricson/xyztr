@@ -35,7 +35,7 @@ object ExternalStore {
     val privateKey = Crypto.getPrivateKeyFromBigIntegers(coreUserData.privateKeyBigIntegerComponentsAsStrings.toSeq.map(s => new BigInteger(s)))
     val publicKey = Crypto.getPublicKeyFromEncoded(coreUserData.encodedPublicKey)
     val recreatedUser = new User(coreUserData.name, privateKey, publicKey)
-    coreUserData.bubbles.foreach(b => recreatedUser.addBubble(b))
+    coreUserData.bubbleHandles.foreach(b => recreatedUser.addBubbleHandle(b))
     coreUserData.friends.foreach(f => recreatedUser.friends.add(f))
 
     recreatedUser

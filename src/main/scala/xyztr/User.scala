@@ -2,15 +2,25 @@ package xyztr
 
 import java.security.{PrivateKey, PublicKey}
 
+import scala.collection.mutable
+
 /**
   * Represents the user of this program. Has a name, friends and private/public keys.
   */
 class User(val name: String, val privateKey: PrivateKey, val publicKey: PublicKey) {
   val friends = new scala.collection.mutable.HashSet[Friend]()                                  // TODO: Make private ???
-  private val bubblesMap = new scala.collection.mutable.HashMap[Array[Byte], BubbleHandle]()    // TODO: Make into a multimap later
-  val getAllBubbles = bubblesMap.values
+  private val bubbleHandleMap = new mutable.HashMap[Array[Byte], mutable.Set[BubbleHandle]] with mutable.MultiMap[Array[Byte], BubbleHandle]
 
-  def addBubble(bubble: BubbleHandle) = bubblesMap.put(bubble.encodedEncryptedEncryptionKey, bubble)
+  def getAllBubbleHandles = {
+    // TODO: There MUST be a smarter way of doing this...
+    val bhSet = new mutable.HashSet[BubbleHandle]
+    for (bubblesSet <- bubbleHandleMap.values) {
+      bubblesSet.map(bh => bhSet.add(bh))
+    }
+    bhSet
+  }
+
+  def addBubbleHandle(bubbleHandle: BubbleHandle) = bubbleHandleMap.addBinding(bubbleHandle.encodedEncryptedEncryptionKey, bubbleHandle)
 
   def acceptFriendRequest(fr: FriendRequest): FriendResponse = {
     friends.add(Friend(fr.nameOfSender, fr.publicKeyOfSender))

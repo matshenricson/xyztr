@@ -37,10 +37,10 @@ class ScenarioTest extends FlatSpec with Matchers {
     val mats = ExternalStore.retrieve(matsPassword)
     val bengt = ExternalStore.retrieve(bengtPassword)
 
-    mats.getAllBubbles.size should be(1)
-    bengt.getAllBubbles.size should be(1)
-    mats.getAllBubbles.head.ipfsHash should be(bengt.getAllBubbles.head.ipfsHash)
-    Crypto.secretKeysAreEqual(mats.getAllBubbles.head.decryptSecretKey(mats.privateKey), bengt.getAllBubbles.head.decryptSecretKey(bengt.privateKey))
+    mats.getAllBubbleHandles.size should be(1)
+    bengt.getAllBubbleHandles.size should be(1)
+    mats.getAllBubbleHandles.head.ipfsHash should be(bengt.getAllBubbleHandles.head.ipfsHash)
+    Crypto.secretKeysAreEqual(mats.getAllBubbleHandles.head.decryptSecretKey(mats.privateKey), bengt.getAllBubbleHandles.head.decryptSecretKey(bengt.privateKey))
   }
 
   def checkThatBothCanDecryptToTheSameBubble() = {
@@ -60,8 +60,8 @@ class ScenarioTest extends FlatSpec with Matchers {
 
   def getDecryptedBubbleFromIpfs(password: String) = {
     val user = ExternalStore.retrieve(password)
-    val bubbleEncryptionKey = user.getAllBubbles.head.decryptSecretKey(user.privateKey)
-    IPFSProxy.receive(user.getAllBubbles.head.ipfsHash, bubbleEncryptionKey)
+    val bubbleEncryptionKey = user.getAllBubbleHandles.head.decryptSecretKey(user.privateKey)
+    IPFSProxy.receive(user.getAllBubbleHandles.head.ipfsHash, bubbleEncryptionKey)
   }
 
   def preCreateUsers() = {
@@ -104,7 +104,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bengt = ExternalStore.retrieve(bengtPassword)
 
     val handles = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded)
-    handles.map(h => bengt.addBubble(h))
+    handles.map(h => bengt.addBubbleHandle(h))
 
     ExternalStore.save(bengt, bengtPassword)
   }
@@ -122,7 +122,7 @@ class ScenarioTest extends FlatSpec with Matchers {
       UserToUserChannel.sendBubbleHandle(f.encodedPublicKeyOfFriend, handle)
     }
 
-    mats.addBubble(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
+    mats.addBubbleHandle(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey))
 
     ExternalStore.save(mats, matsPassword)
   }

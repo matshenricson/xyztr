@@ -76,4 +76,29 @@ class UserTest extends FlatSpec with Matchers {
     fetchedBubbleFromIpfs.members.tail.head.name should be(bubble.members.tail.head.name)
     fetchedBubbleFromIpfs.members.tail.head.encodedPublicKey should be(bubble.members.tail.head.encodedPublicKey)
   }
+
+  "MultiMap" can "be understood..." in {
+    val mats = User("Mats")
+
+    val b1 = Bubble("Bubble 1", mats, mats.friends.toSet)
+    val b1Key = Crypto.createNewSymmetricEncryptionKey()
+
+    val b2 = Bubble("Bubble 2", mats, mats.friends.toSet)
+    val b2Key = Crypto.createNewSymmetricEncryptionKey()
+
+    val b1Handle = BubbleHandle("ipfsHash1", b1Key, mats.publicKey, None)
+    val b2Handle = BubbleHandle("ipfsHash2", b2Key, mats.publicKey, None)
+    mats.addBubbleHandle(b1Handle)
+    mats.addBubbleHandle(b2Handle)
+
+    mats.getAllBubbleHandles.size should be(2)
+
+    // Now comes the kicker, create a new Bubble Handle, which is a new version of b1Handle
+    val b1PrimeHandle = BubbleHandle("ipfsHash1Prime", b1Key, mats.publicKey, None)
+    mats.addBubbleHandle(b1PrimeHandle)
+
+    mats.getAllBubbleHandles.size should be(3)
+
+    CoreUserData(mats).bubbleHandles.size should be(3)
+  }
 }

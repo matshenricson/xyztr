@@ -10,7 +10,7 @@ case class CoreUserData(name: String,
                         friends: Set[Friend],
                         encodedPublicKey: Array[Byte],
                         privateKeyBigIntegerComponentsAsStrings: List[String],
-                        bubbles: Set[BubbleHandle])
+                        bubbleHandles: Set[BubbleHandle])
 
 object CoreUserData {
   def apply(user: User): CoreUserData = {
@@ -18,6 +18,6 @@ object CoreUserData {
       user.friends.toSet,
       user.publicKey.getEncoded,
       Crypto.createPrivateKeyBigIntegerComponentsAsStrings(user.privateKey),
-      user.getAllBubbles.toSet)
+      user.getAllBubbleHandles.toSet)
   }
 }

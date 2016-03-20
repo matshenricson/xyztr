@@ -18,7 +18,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
-    mats.addBubble(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey, None))
+    mats.addBubbleHandle(BubbleHandle(ipfsHash, bubbleEncryptionKey, mats.publicKey, None))
 
     val coreUserData = CoreUserData(mats)
     Crypto.privateKeysAreEqual(
@@ -28,8 +28,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     coreUserData.name should be(mats.name)
     coreUserData.friends.size should be(1)
     Crypto.encodedKeysAreEqual(coreUserData.friends.head.encodedPublicKeyOfFriend, bengt.publicKey.getEncoded) should be(true)
-    coreUserData.bubbles.size should be(mats.getAllBubbles.size)
-    coreUserData.bubbles.head.blockchainHashId should be(None)
+    coreUserData.bubbleHandles.size should be(mats.getAllBubbleHandles.size)
+    coreUserData.bubbleHandles.head.blockchainHashId should be(None)
   }
 
   "CoreUserData" can "be serialized and deserialized to JSON" in {
@@ -41,7 +41,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
     val bubble = Bubble("Bubble name", mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
-    mats.addBubble(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(bubbleEncryptionKey.getEncoded, mats.publicKey), new Date().getTime, Some(blockchainHashId)))
+    mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(bubbleEncryptionKey.getEncoded, mats.publicKey), new Date().getTime, Some(blockchainHashId)))
     val coreUserData = CoreUserData(mats)
 
     val json = JSON.toJsonString(coreUserData)
@@ -53,8 +53,8 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     coreUserData.friends.size should be(newCoreUserData.friends.size)
     coreUserData.friends.head.encodedPublicKeyOfFriend should be(newCoreUserData.friends.head.encodedPublicKeyOfFriend)
     coreUserData.friends.head.friendName should be(newCoreUserData.friends.head.friendName)
-    coreUserData.bubbles.size should be(newCoreUserData.bubbles.size)
-    coreUserData.bubbles.head.blockchainHashId.get should be(blockchainHashId)
+    coreUserData.bubbleHandles.size should be(newCoreUserData.bubbleHandles.size)
+    coreUserData.bubbleHandles.head.blockchainHashId.get should be(blockchainHashId)
   }
 
   val password = "PASSWORD"
@@ -66,7 +66,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt)
     mats.acceptFriendRequest(fr)
 
-    mats.addBubble(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
+    mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
       new Date().getTime, Some(blockchainHashId)))
 
     ExternalStore.save(mats, password)
@@ -79,7 +79,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     val fr = FriendRequest(bengt)
     mats.acceptFriendRequest(fr)
 
-    mats.addBubble(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
+    mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
       new Date().getTime, Some(blockchainHashId)))
 
     ExternalStore.save(mats, password)
@@ -93,11 +93,11 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     newUser.friends.size should be(1)
     Crypto.encodedKeysAreEqual(newUser.friends.head.encodedPublicKeyOfFriend, mats.friends.head.encodedPublicKeyOfFriend) should be(true)
     newUser.friends.head.friendName should be(mats.friends.head.friendName)
-    newUser.getAllBubbles.size should be(mats.getAllBubbles.size)
-    newUser.getAllBubbles.size should be(1)
-    newUser.getAllBubbles.head.ipfsHash should be(mats.getAllBubbles.head.ipfsHash)
-    newUser.getAllBubbles.head.blockchainHashId.get should be(blockchainHashId)
-    Crypto.encodedKeysAreEqual(newUser.getAllBubbles.head.encodedEncryptedEncryptionKey, mats.getAllBubbles.head.encodedEncryptedEncryptionKey) should be(true)
+    newUser.getAllBubbleHandles.size should be(mats.getAllBubbleHandles.size)
+    newUser.getAllBubbleHandles.size should be(1)
+    newUser.getAllBubbleHandles.head.ipfsHash should be(mats.getAllBubbleHandles.head.ipfsHash)
+    newUser.getAllBubbleHandles.head.blockchainHashId.get should be(blockchainHashId)
+    Crypto.encodedKeysAreEqual(newUser.getAllBubbleHandles.head.encodedEncryptedEncryptionKey, mats.getAllBubbleHandles.head.encodedEncryptedEncryptionKey) should be(true)
   }
 
   "User" can "be recreated from a password" in {
@@ -110,7 +110,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
       val fr = FriendRequest(bengt)
       mats.acceptFriendRequest(fr)
 
-      mats.addBubble(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(symmetricKey.getEncoded, mats.publicKey), new Date().getTime, Some(blockchainHashId)))
+      mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(symmetricKey.getEncoded, mats.publicKey), new Date().getTime, Some(blockchainHashId)))
 
       ExternalStore.save(mats, password)
     }
@@ -122,10 +122,10 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     recreatedMats.name should be(mats.name)
     Crypto.privateKeysAreEqual(recreatedMats.privateKey, mats.privateKey) should be(true)
     Crypto.publicKeysAreEqual(recreatedMats.publicKey, mats.publicKey) should be(true)
-    recreatedMats.getAllBubbles.size should be(1)
-    recreatedMats.getAllBubbles.head.ipfsHash should be(ipfsHash)
-    recreatedMats.getAllBubbles.head.blockchainHashId.get should be(blockchainHashId)
-    Crypto.encodedKeysAreEqual(recreatedMats.getAllBubbles.head.encodedEncryptedEncryptionKey, mats.getAllBubbles.head.encodedEncryptedEncryptionKey) should be(true)
+    recreatedMats.getAllBubbleHandles.size should be(1)
+    recreatedMats.getAllBubbleHandles.head.ipfsHash should be(ipfsHash)
+    recreatedMats.getAllBubbleHandles.head.blockchainHashId.get should be(blockchainHashId)
+    Crypto.encodedKeysAreEqual(recreatedMats.getAllBubbleHandles.head.encodedEncryptedEncryptionKey, mats.getAllBubbleHandles.head.encodedEncryptedEncryptionKey) should be(true)
     recreatedMats.friends.size should be(1)
     Crypto.encodedKeysAreEqual(recreatedMats.friends.head.encodedPublicKeyOfFriend, bengt.publicKey.getEncoded) should be(true)
     recreatedMats.friends.head.friendName should be(bengt.name)
