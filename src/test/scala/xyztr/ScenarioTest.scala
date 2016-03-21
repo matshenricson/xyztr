@@ -14,19 +14,19 @@ class ScenarioTest extends FlatSpec with Matchers {
   "Abstractions" can "easily be used as intended" in {
     preCreateUsers()
     matsSendsFriendRequestToBengt()
-    bengtHandlesFriendRequest_SendsBackFriendResponse()
+    bengtHandlesFriendRequestFromMats_SendsBackFriendResponseToMats()
     matsHandlesFriendResponseFromBengt()
     matsCreatesBubble_SendsItToIpfs_SendsBubbleHandleToBengt()
-    bengtGetsBubbleHandle()
+    bengtGetsBubbleHandles()
     checkThatMatsAndBengtAreMutualFriends()
     checkThatBothHaveTheSameBubbleHandles()
     checkThatBothCanDecryptToTheSameBubble()
     bengtGetsBubble_ChangesIt_SavesToIpfs_SendsBubbleHandleToMats()
-    matsGetsBubbleHandle()
+    matsGetsBubbleHandles()
     matsGetsBubble_CanSeeThatItIsChanged()
     matsGetsBubble_AddsSoundFile_SavesToIpfs_SendsBubbleHandleToBengt()
-    bengtGetsBubbleHandle()
-    bengtGetsBubble_CanSeeThatItNowHasImage()
+    bengtGetsBubbleHandles()
+    bengtGetsBubble_CanSeeThatItNowHasSound()
   }
 
   def checkThatMatsAndBengtAreMutualFriends() = {
@@ -98,7 +98,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     LocalStore.save(mats, matsPassword)
   }
 
-  def bengtHandlesFriendRequest_SendsBackFriendResponse() = {
+  def bengtHandlesFriendRequestFromMats_SendsBackFriendResponseToMats() = {
     val bengt = LocalStore.retrieve(bengtPassword)
 
     // TODO: Rewrite below so that it can handle a collection of FriendRequest objects
@@ -109,7 +109,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     LocalStore.save(bengt, bengtPassword)
   }
 
-  def bengtGetsBubbleHandle() = {
+  def bengtGetsBubbleHandles() = {
     val bengt = LocalStore.retrieve(bengtPassword)
 
     val handles = UserToUserChannel.getBubbleHandle(bengt.publicKey.getEncoded)
@@ -142,7 +142,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     LocalStore.save(bengt, bengtPassword)
   }
 
-  def matsGetsBubbleHandle() = {
+  def matsGetsBubbleHandles() = {
     val mats = LocalStore.retrieve(matsPassword)
 
     val handles = UserToUserChannel.getBubbleHandle(mats.publicKey.getEncoded)
@@ -190,7 +190,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     LocalStore.save(mats, matsPassword)
   }
 
-  def bengtGetsBubble_CanSeeThatItNowHasImage() = {
+  def bengtGetsBubble_CanSeeThatItNowHasSound() = {
     val bengt = LocalStore.retrieve(bengtPassword)
 
     bengt.getAllBubbleHandles.toSet.size should be(3)

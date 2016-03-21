@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
     </list>
     <ignored path="xyztr.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScenarioTest.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ScenarioTest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.290323">
-              <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.80679786">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="e#15#50#0" expanded="true" />
               </folding>
@@ -65,10 +63,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExternalStore.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ExternalStore.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48300537">
+            <state vertical-scroll-proportion="0.0">
               <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
@@ -159,10 +157,10 @@
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala" />
-        <option value="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
       </list>
     </option>
   </component>
@@ -947,7 +945,7 @@
       <workItem from="1457901205769" duration="45324000" />
       <workItem from="1458055072377" duration="73797000" />
       <workItem from="1458380613510" duration="70335000" />
-      <workItem from="1458562258802" duration="4809000" />
+      <workItem from="1458562258802" duration="5881000" />
     </task>
     <task id="LOCAL-00001" summary="Added a new test using public and private keys.">
       <created>1458502286158</created>
@@ -997,7 +995,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229513000" />
+    <option name="totallyTimeSpent" value="230585000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1010,7 +1008,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5028449" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37124464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37124464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1051,12 +1049,6 @@
           <line>321</line>
           <properties />
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala</url>
-          <line>114</line>
-          <properties />
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="21" />
@@ -1464,12 +1456,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.290323">
-          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#15#50#0" expanded="true" />
+            <element signature="e#15#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1482,12 +1474,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48300537">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.80679786">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
-            <element signature="e#15#44#0" expanded="true" />
+            <element signature="e#15#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
