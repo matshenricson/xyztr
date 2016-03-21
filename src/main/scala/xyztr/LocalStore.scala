@@ -12,7 +12,7 @@ import org.jboss.netty.util.CharsetUtil
   * Saves core data needed to bootstrap usage of XYZTR for a user on this particular client.
   * This could be an encrypted file, or IPFS itself, but then we need a IPFS hash in some way.
   */
-object ExternalStore {
+object LocalStore {
   def fileName(secretKey: SecretKey) = "/home/mats/tmp/" + Base58.encode(secretKey.getEncoded)    // TODO: Probably won't work on other machine :-)
 
   def save(user: User, password: String) = {

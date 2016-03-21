@@ -5,7 +5,7 @@ import java.util.Date
 
 import org.scalatest.{FlatSpec, Matchers}
 
-class ExternalStoreTest extends FlatSpec with Matchers {
+class LocalStoreTest extends FlatSpec with Matchers {
   val blockchainHashId = "blockchainHashId"
   val ipfsHash = "ipfsHash"
 
@@ -69,7 +69,7 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
       new Date().getTime, Some(blockchainHashId)))
 
-    ExternalStore.save(mats, password)
+    LocalStore.save(mats, password)
   }
 
   "User" can "be retrieved from file" in {
@@ -82,9 +82,9 @@ class ExternalStoreTest extends FlatSpec with Matchers {
     mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(Crypto.createNewSymmetricEncryptionKey().getEncoded, mats.publicKey),
       new Date().getTime, Some(blockchainHashId)))
 
-    ExternalStore.save(mats, password)
+    LocalStore.save(mats, password)
 
-    val newUser = ExternalStore.retrieve(password)
+    val newUser = LocalStore.retrieve(password)
 
     newUser.name should be(mats.name)
     Crypto.publicKeysAreEqual(newUser.publicKey, mats.publicKey) should be(true)
@@ -112,11 +112,11 @@ class ExternalStoreTest extends FlatSpec with Matchers {
 
       mats.addBubbleHandle(BubbleHandle(ipfsHash, Crypto.encryptWithPublicKey(symmetricKey.getEncoded, mats.publicKey), new Date().getTime, Some(blockchainHashId)))
 
-      ExternalStore.save(mats, password)
+      LocalStore.save(mats, password)
     }
 
     // OK, now lets try to load the user from disk
-    val recreatedMats = ExternalStore.retrieve(password)
+    val recreatedMats = LocalStore.retrieve(password)
 
     // TODO: Can we use "recreatedMats shouldEqual mats" instead ????
     recreatedMats.name should be(mats.name)
