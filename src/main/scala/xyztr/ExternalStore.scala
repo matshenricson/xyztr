@@ -8,7 +8,7 @@ import xyztr.TierionClient.SaveBubbleRecordResponse
 /**
   * The external storage for bubbles
   */
-object ExternalStore_RENAME_LATER {
+object ExternalStore {
   private def sendBubbleNotificationsToBubbleMembers(bubble: Bubble, ipfsHash: String, bubbleEncryptionKey: SecretKey, user: User,
                                                      tierionResponse: Option[SaveBubbleRecordResponse] = None) = {
     for (m <- bubble.members) {
@@ -16,7 +16,7 @@ object ExternalStore_RENAME_LATER {
       UserToUserChannel.sendBubbleHandle(m.encodedPublicKey, handle)
     }
 
-    // Also add BubbleHandle to yourself...
+    // Also add new BubbleHandle to yourself...
     user.addBubbleHandle(BubbleHandle(ipfsHash, bubbleEncryptionKey, user.publicKey, tierionResponse))
   }
 

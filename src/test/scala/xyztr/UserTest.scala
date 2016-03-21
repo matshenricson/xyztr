@@ -3,12 +3,6 @@ package xyztr
 import org.scalatest.{FlatSpec, Matchers}
 
 class UserTest extends FlatSpec with Matchers {
-  "User" should "have a public key" in {
-    val mats = User("Mats Henricson")
-    val publicKey = mats.publicKey
-    publicKey should not be null
-  }
-
   "User" can "get friends" in {
     val mats = User("Mats Henricson")
     val bengt = User("Bengt Henricson")
@@ -33,10 +27,7 @@ class UserTest extends FlatSpec with Matchers {
   "BubbleHandle" can "be sorted" in {
     val mats = User("Mats")
 
-    val b1 = Bubble("Bubble 1", mats, mats.friends.toSet)
     val b1Key = Crypto.createNewSymmetricEncryptionKey()
-
-    val b2 = Bubble("Bubble 2", mats, mats.friends.toSet)
     val b2Key = Crypto.createNewSymmetricEncryptionKey()
 
     val b1Handle = BubbleHandle("ipfsHash1", b1Key, mats.publicKey)

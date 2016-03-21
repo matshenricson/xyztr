@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b80fd19-1efb-4744-9efd-300a89875984" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/ExternalStoreTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/LocalStoreTest.scala" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" afterPath="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" afterPath="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
@@ -58,7 +56,7 @@
       <file leaf-file-name="ScenarioTest.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.064516">
+            <state vertical-scroll-proportion="-25.290323">
               <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
               <folding>
                 <element signature="e#15#50#0" expanded="true" />
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExternalStore_RENAME_LATER.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala">
+      <file leaf-file-name="ExternalStore.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.48300537">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
               </folding>
@@ -83,16 +81,16 @@
         <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocalStore.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LocalStore.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.1538461">
+            <state vertical-scroll-proportion="0.0">
               <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
                 <element signature="e#15#46#0" expanded="true" />
@@ -160,11 +158,11 @@
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/AudioData.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/Bubble.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/IPFSProxy.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala" />
       </list>
     </option>
   </component>
@@ -949,7 +947,7 @@
       <workItem from="1457901205769" duration="45324000" />
       <workItem from="1458055072377" duration="73797000" />
       <workItem from="1458380613510" duration="70335000" />
-      <workItem from="1458562258802" duration="4442000" />
+      <workItem from="1458562258802" duration="4809000" />
     </task>
     <task id="LOCAL-00001" summary="Added a new test using public and private keys.">
       <created>1458502286158</created>
@@ -991,15 +989,15 @@
     <history-entry file="ScenarioTest - 2016.03.21 at 15h 14m 41s.xml">
       <configuration name="ScenarioTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
-    <history-entry file="UserTest - 2016.03.20 at 22h 26m 44s.xml">
-      <configuration name="UserTest" configurationId="ScalaTestRunConfiguration" />
+    <history-entry file="ScenarioTest - 2016.03.21 at 15h 21m 36s.xml">
+      <configuration name="ScenarioTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
     <history-entry file="UserTest - 2016.03.20 at 22h 29m 28s.xml">
       <configuration name="UserTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229146000" />
+    <option name="totallyTimeSpent" value="229513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1012,7 +1010,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5028449" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37124464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37124464" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1056,27 +1054,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala</url>
-          <line>187</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala</url>
-          <line>198</line>
-          <properties />
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala</url>
           <line>114</line>
           <properties />
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala</url>
-          <line>14</line>
-          <properties />
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="21" />
@@ -1281,7 +1261,7 @@
         <state vertical-scroll-proportion="-0.42218247">
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding>
-            <element signature="e#15#54#0" expanded="true" />
+            <element signature="e#15#54#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1299,7 +1279,7 @@
         <state vertical-scroll-proportion="-2.5420394">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
           <folding>
-            <element signature="e#15#42#0" expanded="true" />
+            <element signature="e#15#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1309,7 +1289,7 @@
         <state vertical-scroll-proportion="-0.15384616">
           <caret line="16" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#15#54#0" expanded="true" />
+            <element signature="e#15#54#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1327,7 +1307,7 @@
         <state vertical-scroll-proportion="0.16100179">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
           <folding>
-            <element signature="e#15#41#0" expanded="true" />
+            <element signature="e#15#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1454,16 +1434,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.064516">
-          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/BubbleHandle.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7781753">
@@ -1479,17 +1449,27 @@
         <state vertical-scroll-proportion="0.40250447">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#15#44#0" expanded="true" />
+            <element signature="e#15#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore_RENAME_LATER.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <element signature="e#15#44#0" expanded="true" />
+            <element signature="e#15#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/ScenarioTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.290323">
+          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1497,17 +1477,17 @@
     <entry file="file://$PROJECT_DIR$/src/test/scala/xyztr/UserTest.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/LocalStore.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/xyztr/ExternalStore.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1538461">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.48300537">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#15#46#0" expanded="true" />
+            <element signature="e#15#44#0" expanded="true" />
           </folding>
         </state>
       </provider>

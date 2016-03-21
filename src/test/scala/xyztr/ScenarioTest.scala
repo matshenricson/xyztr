@@ -70,7 +70,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val user = LocalStore.retrieve(password)
 
     val bubbleEncryptionKey = user.getAllBubbleHandles.head.decryptSecretKey(user.privateKey)
-    ExternalStore_RENAME_LATER.fetch(user.getAllBubbleHandles.head.ipfsHash, bubbleEncryptionKey)
+    ExternalStore.fetch(user.getAllBubbleHandles.head.ipfsHash, bubbleEncryptionKey)
   }
 
   def preCreateUsers() = {
@@ -124,7 +124,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val bubble = Bubble(bubbleName, mats, mats.friends.toSet)
     val bubbleEncryptionKey = Crypto.createNewSymmetricEncryptionKey()
 
-    ExternalStore_RENAME_LATER.saveAndStamp(bubble, bubbleEncryptionKey, mats)
+    ExternalStore.saveAndStamp(bubble, bubbleEncryptionKey, mats)
 
     LocalStore.save(mats, matsPassword)
   }
@@ -134,10 +134,10 @@ class ScenarioTest extends FlatSpec with Matchers {
 
     val oldHandle = bengt.getAllBubbleHandles.toSet.head
     val bubbleEncryptionKey = oldHandle.decryptSecretKey(bengt.privateKey)
-    val oldBubble = ExternalStore_RENAME_LATER.fetch(oldHandle.ipfsHash, bubbleEncryptionKey)
+    val oldBubble = ExternalStore.fetch(oldHandle.ipfsHash, bubbleEncryptionKey)
     val newBubble = oldBubble.copy(name = "Changed " + oldBubble.name)
 
-    ExternalStore_RENAME_LATER.save(newBubble, bubbleEncryptionKey, bengt)
+    ExternalStore.save(newBubble, bubbleEncryptionKey, bengt)
 
     LocalStore.save(bengt, bengtPassword)
   }
@@ -161,7 +161,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val aHandle = mats.getAllBubbleHandles.toSet.head
     val latestHandle = mats.getLatestBubbleHandle(aHandle)
     val bubbleEncryptionKey = latestHandle.decryptSecretKey(mats.privateKey)
-    val newBubble = ExternalStore_RENAME_LATER.fetch(latestHandle.ipfsHash, bubbleEncryptionKey)
+    val newBubble = ExternalStore.fetch(latestHandle.ipfsHash, bubbleEncryptionKey)
     newBubble.creatorName should be(mats.name)
     newBubble.name should be("Changed " + bubbleName)
 
@@ -181,11 +181,11 @@ class ScenarioTest extends FlatSpec with Matchers {
 
     val oldHandle = mats.getAllBubbleHandles.toSet.head
     val bubbleEncryptionKey = oldHandle.decryptSecretKey(mats.privateKey)
-    val oldBubble = ExternalStore_RENAME_LATER.fetch(oldHandle.ipfsHash, bubbleEncryptionKey)
+    val oldBubble = ExternalStore.fetch(oldHandle.ipfsHash, bubbleEncryptionKey)
     val newAudioData = getAudioData(oldBubble)
     val newBubble = oldBubble.copy(audio = newAudioData)
 
-    ExternalStore_RENAME_LATER.save(newBubble, bubbleEncryptionKey, mats)
+    ExternalStore.save(newBubble, bubbleEncryptionKey, mats)
 
     LocalStore.save(mats, matsPassword)
   }
@@ -199,7 +199,7 @@ class ScenarioTest extends FlatSpec with Matchers {
     val aHandle = bengt.getAllBubbleHandles.toSet.head
     val latestHandle = bengt.getLatestBubbleHandle(aHandle)
     val bubbleEncryptionKey = latestHandle.decryptSecretKey(bengt.privateKey)
-    val newBubble = ExternalStore_RENAME_LATER.fetch(latestHandle.ipfsHash, bubbleEncryptionKey)
+    val newBubble = ExternalStore.fetch(latestHandle.ipfsHash, bubbleEncryptionKey)
 
     newBubble.audio.size should be(1)
     newBubble.audio.head.data.length should be > 10000
