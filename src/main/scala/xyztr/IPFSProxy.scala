@@ -9,7 +9,7 @@ import org.jboss.netty.util.CharsetUtil
   * Proxy to IPFS
   */
 object IPFSProxy {
-  val ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001")
+  val ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001")    // Only 127.0.0.1 works, weirdly enough
 
   /**
     * Encrypts a bubble and sends it to IPFS

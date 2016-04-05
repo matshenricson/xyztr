@@ -22,7 +22,7 @@ object ExternalStore {
 
   def save(bubble: Bubble, bubbleEncryptionKey: SecretKey, user: User) = {
     val ipfsHash = IPFSProxy.send(bubble, bubbleEncryptionKey)
-    sendBubbleNotificationsToBubbleMembers(bubble, ipfsHash, bubbleEncryptionKey, user, None)
+    sendBubbleNotificationsToBubbleMembers(bubble, ipfsHash, bubbleEncryptionKey, user)
   }
 
   def saveAndStamp(bubble: Bubble, bubbleEncryptionKey: SecretKey, user: User) = {

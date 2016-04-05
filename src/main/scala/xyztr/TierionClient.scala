@@ -18,6 +18,7 @@ object TierionClient {
       .hosts("api.tierion.com:443")
       .tls("api.tierion.com")
       .codec(com.twitter.finagle.http.Http())
+      .failFast(false)
       .hostConnectionLimit(1).build()
 
   private def createRequest(method: Method, uri: String) = {
