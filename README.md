@@ -45,3 +45,7 @@ A bubble is composed of:
 * Register domain, xyztr.com is taken, all other xyztr Seems to be Free
 * Register Trademark on "Bubble Spacetime"
 * Make mediafiles uploaded to IPFS as individual files instead of inside the bubble, OR let the bubble have a collection of IPFS hashes to media of different types
+
+## xyztr - what does that mean?
+
+**xyz** is, of course, the traditional cartesian (space) coordinates, while **t** is time. Everything in normal space can be pinpointed by a space coordinate in time, i.e. **xyzt**. Then, of course, **r** is the radius of a bubble. Spacetime bubble, **xyztr**. QED.
